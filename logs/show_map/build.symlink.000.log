@@ -1,0 +1,3 @@
+Symlinking /home/parallels/Duckietown/lane_slam_ws/devel/lib/pkgconfig/show_map.pc
+Symlinking /home/parallels/Duckietown/lane_slam_ws/devel/share/show_map/cmake/show_mapConfig.cmake
+Symlinking /home/parallels/Duckietown/lane_slam_ws/devel/share/show_map/cmake/show_mapConfig-version.cmake
