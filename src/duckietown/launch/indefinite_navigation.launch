@@ -1,0 +1,31 @@
+<launch>
+    <arg name="veh" doc="Name of vehicle. ex: megaman"/>
+    <arg name="local" default="false" doc="true for running on laptop. false for running on vehicle."/>
+    <arg name="config" default="baseline" doc="Specify a config."/>
+    <arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman. Note that you will need a megaman.yaml in the config folder for every node you are launching. To test with only one megaman.yaml, the recommendation is to set this to default and then manually change the desired param file in the approprate rosparam tag below"/> 
+
+    <remap from="open_loop_intersection_control_node/turn_type" to="random_april_tag_turns_node/turn_type"/>
+    <include file="$(find duckietown)/launch/navigation.launch">
+      <arg name="veh" value="$(arg veh)"/>        
+      <arg name="local" value="$(arg local)"/>        
+      <arg name="config" value="$(arg config)"/>        
+      <arg name="param_file_name" value="$(arg param_file_name)"/>        
+    </include>
+
+    <include file="$(find duckietown)/launch/apriltags.launch">
+      <arg name="veh" value="$(arg veh)"/>        
+      <arg name="local" value="$(arg local)"/>        
+      <arg name="config" value="$(arg config)"/>        
+      <arg name="param_file_name" value="$(arg param_file_name)"/>        
+      <arg name="camera" value="false"/> <!-- camera is launched by navigation -->
+    </include>
+
+    <remap from="random_april_tag_turns_node/mode" to="fsm_node/mode"/>
+    <remap from="random_april_tag_turns_node/tag"  to="apriltags_postprocessing_global_node/apriltags"/>
+    <include file="$(find navigation)/launch/random_april_tag_turns_node.launch">
+      <arg name="veh" value="$(arg veh)"/>        
+      <arg name="local" value="$(arg local)"/>        
+      <arg name="config" value="$(arg config)"/>        
+      <arg name="param_file_name" value="$(arg param_file_name)"/>        
+    </include>
+</launch>

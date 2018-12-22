@@ -1,0 +1,38 @@
+<launch>
+    <arg name="veh" doc="Name of vehicle. ex: megaman"/>
+    <arg name="local" default="false" doc="true for running on laptop. false for running on vehicle."/>
+    <arg name="config" default="baseline" doc="Specify a config."/>
+    <arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+
+
+    <include file="$(find duckietown)/machines"/>
+    <!-- joy -->
+    <node ns="$(arg veh)" if="$(arg local)" pkg="joy" type="joy_node" name="joy" output="screen">
+        <rosparam command="load" file="$(find duckietown)/config/$(arg config)/joy/joy_node/$(arg param_file_name).yaml"/>
+    </node>
+    <node ns="$(arg veh)" unless="$(arg local)" machine="$(arg veh)" pkg="joy" type="joy_node" name="joy" output="screen">
+        <rosparam command="load" file="$(find duckietown)/config/$(arg config)/joy/joy_node/$(arg param_file_name).yaml"/>
+    </node>
+
+    <!-- joy_mapper -->
+    <include file="$(find joy_mapper)/launch/joy_mapper_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+        <arg name="param_file_name" value="$(arg param_file_name)"/>
+    </include>
+
+    <!-- All Kinematics Nodes -->
+    <remap from="inverse_kinematics_node/car_cmd" to="joy_mapper_node/car_cmd"/>
+    <include file="$(find duckietown)/launch/kinematics.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+        <arg name="param_file_name" value="$(arg param_file_name)"/>
+    </include>
+
+    <!-- Wheel Driver -->
+    <include file="$(find dagu_car)/launch/wheels_driver_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+    </include>
+</launch>

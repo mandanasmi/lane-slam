@@ -1,0 +1,10 @@
+<launch>
+    <arg name="veh" doc="Name of vehicle. ex: megaman"/>
+
+    <include file="$(find duckietown)/machines"/>
+
+    <!-- Wheels Driver -->
+    <include file="$(find dagu_car)/launch/wheels_driver_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+    </include>
+</launch>

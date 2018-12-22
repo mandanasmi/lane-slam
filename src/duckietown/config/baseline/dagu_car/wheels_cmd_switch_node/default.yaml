@@ -1,0 +1,15 @@
+mode_topic: "fsm_node/mode"
+source_topics: #Mapping for name to topics
+  lane: "lane_controller_node/wheels_control"
+  intersection: "open_loop_intersection_control_node/wheels_cmd"
+  coordination: "veh_coordinator_node/coordination_cmd"
+  joystick: 	"joy_mapper_node/car_cmd"
+  vehicle: 	"vehicle_avoidance_control_node/wheels_cmd"
+  obstacle:	"simple_stop_controller_node/control"
+mappings: #Mapping from FSMStates.state to names
+  LANE_FOLLOWING: "lane"
+  INTERSECTION_CONTROL: "intersection"
+  COORDINATION: "coordination"
+  JOYSTICK_CONTROL: "joystick"
+  VEHICLE_AVOIDANCE: "vehicle"
+  OBSTACLE_AVOID:    "obstacle"

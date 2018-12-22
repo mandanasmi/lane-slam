@@ -1,0 +1,16 @@
+  # default parameters for forward_kinematics_node and inverse_kinematics_node
+
+  fi_theta_dot_function_param: Duty_fi_theta_dot_compound_linear
+  fi_v_function_param: Duty_fi_v_compound_linear
+  theta_dot_weights_param: [-1.0, 0.0]
+  v_weights_param: [1.0, 0.0]
+
+  theta_dot_filename_1: left_turns
+  theta_dot_filename_2: right_turns
+  v_filename_1: one_meter
+  theta_delta_1: 62.8318530718
+  theta_delta_2: -62.8318530718
+  distance_1: 1.0
+
+  learner_theta_dot_regularizer: 0.01
+  learner_v_regularizer: 0.01

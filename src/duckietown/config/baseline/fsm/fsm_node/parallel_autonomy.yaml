@@ -1,0 +1,102 @@
+# Initial state of the FSM
+initial_state: "JOYSTICK_CONTROL"
+
+
+events: #Maps from subscribing topic to singal ids
+  joystick_override_on: 
+    topic: "joy_mapper_node/joystick_override"
+    msg_type: "BoolStamped"
+    trigger: True
+  joystick_override_off: 
+    topic: "joy_mapper_node/joystick_override"
+    msg_type: "BoolStamped"
+    trigger: False
+  at_stop_line:
+    topic: "stop_line_filter_node/at_stop_line"
+    msg_type: "BoolStamped"
+    trigger: True
+  intersection_go:
+    topic: "veh_coordinator_node/intersection_go"
+    msg_type: "BoolStamped"
+    trigger: True
+  intersection_done:
+    topic: "open_loop_intersection_control_node/intersection_done"
+    msg_type: "BoolStamped"
+    trigger: True
+
+# Define global transitions. Available from all states.
+global_transitions:
+  joystick_override_on: "JOYSTICK_CONTROL"
+
+# Define nodes 
+nodes:
+  decoder_node: "decoder_node/switch"
+  # anti_instagram_node: "anti_instagram_node/switch"
+  apriltag_global_node: "apriltags_preprocessing_node/global_switch"
+  apriltag_fast_node: "apriltags_preprocessing_node/fast_switch"
+  vehicle_detector_node: "vehicle_detection_node/switch"
+  # led_detector_node: "LED_detection_node/switch"
+  static_object_detector_node: "static_object_detector_node/switch"
+  line_detector_node: "line_detector_node/switch"
+  lane_filter_node: "lane_filter_node/switch"
+  stop_line_filter_node: "stop_line_filter_node/switch"
+
+# Define state transitions
+states:
+  JOYSTICK_CONTROL:
+    transitions:
+      at_stop_line: "INTERSECTION_CONTROL"
+      out_of_lane: "LANE_FOLLOWING"
+      joystick_control_off: "LANE_FOLLOWING"
+      # TODO add obj and veh detection
+      
+
+    active_nodes: 
+      - vehicle_detector_node
+      - static_object_detector_node
+      - lane_filter_node
+      - line_detector_node
+      - stop_line_filter_node
+      - anti_instagram_node
+
+    lights: ["joystick"]
+
+  LANE_FOLLOWING:
+    transitions:
+      at_stop_line: "INTERSECTION_CONTROL"
+      joystick_control_on: "JOYSTICK_CONTROL"
+      # TODO add obj and veh detection
+
+    active_nodes:
+      - vehicle_detector_node
+      - static_object_detector_node
+      - lane_filter_node
+      - line_detector_node
+      - stop_line_filter_node
+      - anti_instagram_node
+    lights: ["joystick"]
+  WAITING_ON_TURN_DIRECTION:
+    transitions:
+      intersection_go: "INTERSECTION_CONTROL"
+    active_nodes:
+      - vehicle_detector_node
+      - static_object_detector_node
+      - lane_filter_node
+      - line_detector_node
+      - stop_line_filter_node
+      - anti_instagram_node
+
+    lights: ["joystick"]
+
+  INTERSECTION_CONTROL:
+    transitions:
+      intersection_done: "LANE_FOLLOWING"
+    active_nodes: 
+      - vehicle_detector_node
+      - static_object_detector_node
+      - lane_filter_node
+      - line_detector_node
+      - stop_line_filter_node
+      - anti_instagram_node
+
+    lights: ["joystick"]

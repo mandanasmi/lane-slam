@@ -1,0 +1,24 @@
+<launch>
+    <arg name="veh" doc="Name of vehicle. ex: megaman"/>
+    <arg name="local" default="true" doc="true for running everything you possibly can on laptop. false for everything running on vehicle."/>
+    <arg name="config" default="baseline" doc="Specify a config."/>
+    <arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+
+    <!-- run forward_kinematics_node -->
+    <remap from="forward_kinematics_node/wheels_cmd" to="wheels_driver_sync_node/wheels_cmd" />
+    <include file="$(find kinematics)/launch/forward_kinematics_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+        <arg name="param_file_name" value="$(arg param_file_name)"/>
+    </include>
+
+    <!-- run inverse_kinematics_node -->
+    <remap from="inverse_kinematics_node/wheels_cmd" to="wheels_driver_sync_node/wheels_cmd" />
+    <include file="$(find kinematics)/launch/inverse_kinematics_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+        <arg name="param_file_name" value="$(arg param_file_name)"/>
+    </include>
+</launch>

@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [316.72059843645064, 0.0, 322.45760825304416, 0.0, 316.6553106102019, 228.40434854818392,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: ducksolo/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.30748704510569047, 0.09074399333897375, 0.0008240583178767724, 0.001678050318361568,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [243.2208251953125, 0.0, 323.84425059804926, 0.0, 0.0, 251.55899047851562,
+    223.46959780467841, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

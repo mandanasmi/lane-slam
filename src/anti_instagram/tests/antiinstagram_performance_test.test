@@ -1,0 +1,5 @@
+<launch>
+    <arg name="max_runtime" default="0.5" />
+
+    <test test-name="antiinstagram_performance_test" pkg="anti_instagram" type="antiinstagram_performance_test.py" />
+</launch>

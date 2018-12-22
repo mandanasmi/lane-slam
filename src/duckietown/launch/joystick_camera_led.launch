@@ -1,0 +1,36 @@
+<launch>
+    <arg name="veh" doc="Name of vehicle. ex: megaman"/>
+    <arg name="local" default="false" doc="true for running on laptop. false for running on vehicle."/>
+    <arg name="config" default="baseline" doc="Specify a config."/>
+    <arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman. Note that you will need a megaman.yaml in the config folder for every node you are launching. To test with only one megaman.yaml, the recommendation is to set this to default and then manually change the desired param file in the approprate rosparam tag below"/> 
+
+    <arg name="trim" default="true" doc="Whether or not to use the wheels_trimmer_node."/>
+    <arg name="raw" default="false" doc="If set to true, also publish raw image using decoder."/> 
+    <arg name="cam_info" default="true" doc="If set to true, use cam_info_reader_node to pusblish CameraInfo."/>
+    <arg name="live" default="true" doc="live set to false means we don't run the actual camera (i.e. running from a log file" />
+
+
+    <include file="$(find duckietown)/launch/joystick_camera.launch">
+      <arg name="veh" value="$(arg veh)"/>
+      <arg name="local" value="$(arg local)"/>
+      <arg name="config" value="$(arg config)"/>
+      <arg name="param_file_name" value="$(arg param_file_name)"/>
+      <arg name="raw" value="$(arg raw)"/>
+      <arg name="cam_info" value="$(arg cam_info)"/> <!-- this should possible change later when we take logs without camera info but let's leave for now -->
+      <arg name="live" value="$(arg live)"/>
+    </include>
+
+
+    <!-- LED emitter -->
+
+    <group ns="$(arg veh)">
+
+    <node name="led_joy_mapper_node" pkg="led_joy_mapper" type="led_joy_mapper_node.py" output="screen">
+        </node>
+        <node name="led_emitter_node" pkg="led_emitter" type="led_emitter_node.py" output="screen">
+            <remap from="~change_light_frequency" to="led_joy_mapper_node/change_light_frequency"/>
+            <remap from="~change_color_pattern" to="led_joy_mapper_node/change_color_pattern"/>
+        </node>
+
+    </group>
+</launch>

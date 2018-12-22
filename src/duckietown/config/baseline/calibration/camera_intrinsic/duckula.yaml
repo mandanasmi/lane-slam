@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [306.37342888213914, 0.0, 308.2561559925181, 0.0, 312.8978117084266, 233.9793736668529,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: duckula/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2548995030999107, 0.04223218280358444, -0.0030250721877148894, -0.00021652344838500923,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [208.42770385742188, 0.0, 311.5151140234375, 0.0, 0.0, 249.72193908691406,
+    225.35970961898602, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

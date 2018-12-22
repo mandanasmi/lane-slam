@@ -1,0 +1,20 @@
+image_width: 640
+image_height: 480
+camera_name: /megaman/rosberrypi_cam
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [312.2647774901193, 0, 298.7699352412828, 0, 316.7924416639175, 213.1178300197452, 0, 0, 1]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [-0.2591287477939386, 0.04310637693840684, -0.002226968820604823, 0.002797274959093028, 0]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [210.6992950439453, 0, 298.9557317790113, 0, 0, 246.4568328857422, 192.1145721119501, 0, 0, 0, 1, 0]

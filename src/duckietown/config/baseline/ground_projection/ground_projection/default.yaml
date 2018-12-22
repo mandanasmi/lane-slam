@@ -1,0 +1,6 @@
+# parameters for ground_projection/ground_projection
+board_w: 7
+board_h: 5
+square_size: 0.031 
+x_offset: 0.191
+y_offset: 0.093

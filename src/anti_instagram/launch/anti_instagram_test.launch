@@ -1,0 +1,30 @@
+<launch>
+	<arg name="veh" default="ferrari"/>
+	<arg name="bagin"/>
+	<arg name="decoder" default="true"/>
+	<arg name="average" default="false"/>
+
+
+	<group ns="$(arg veh)">
+		<remap if="$(arg decoder)" from="~uncorrected_image" to="raw_image"/>
+		<remap unless="$(arg decoder)" from="~uncorrected_image" to="camera_node/image/raw"/>
+		<include file="$(find anti_instagram)/launch/anti_instagram_node.launch"/>
+	
+		<group if="$(arg decoder)">
+			<node name="decoder_node" pkg="pi_camera" type="decoder_node.py">
+				<remap from="~compressed_image" to="camera_node/image/compressed"/>
+				<remap from="~image/raw" to="raw_image"/>
+			</node>
+		</group>
+		<group if="$(arg average)">
+			<node name="image_average" pkg="image_average_mfe" type="image_average_mfe_node.py" output="screen">
+				<remap from="~ave_img" to="$(arg veh)/average_image"/>
+				<remap from="~raw_img" to="/anti_instagram_node/corrected_image"/>
+				<!-- <remap if="$(arg decoder)" from="~raw_img" to="$(arg veh)/raw_image"/> -->
+				<!-- <remap unless="$(arg decoder)" from="~raw_img" to="$(arg veh)/camera_node/image/raw"/> -->
+			</node>
+		</group>
+
+	</group>
+	<node pkg="rosbag" type="play" name="player" args="$(arg bagin) -l"/>
+</launch>

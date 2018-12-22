@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [318.2765386206801, 0.0, 321.26181611176105, 0.0, 325.30025245737306, 239.94428134440363,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: ada/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2720813316859305, 0.04811261938081579, 0.0029841039409895884, 0.0006559066338705289,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [215.7096710205078, 0.0, 320.1776112938187, 0.0, 0.0, 261.8138122558594, 243.28979890407936,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

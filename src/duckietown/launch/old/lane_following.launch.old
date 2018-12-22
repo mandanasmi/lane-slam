@@ -1,0 +1,95 @@
+<launch>
+	<!-- <group ns="veh_name"> -->
+	<arg name="veh" default="megaman"/> <!-- this should probably get removed later-->
+	<arg name="joy_mode" default="true"/>
+	<arg name="camera" default="rosberrypi_cam"/>
+
+	<include file="$(find duckietown)/machines"/>
+	
+	<group ns="$(arg veh)">
+		<!-- Launch camera on veh-->
+		<node machine="$(arg veh)" pkg="rosberrypi_cam" type="rosberrypi_cam_node" name="rosberrypi_cam" output="screen">
+			<param name="~camera_info_url" value="package://rosberrypi_cam/calibration/picamera.yaml"/>
+			<!-- <param name="~fps" value="60"/> -->
+			<param name="~fps" value="15"/>
+			<!-- <param name="~height" value="200"/> -->
+			<!-- <param name="~width" value="320"/> -->
+			<param name="~height" value="200"/>
+			<param name="~width" value="320"/>
+			<param name="~brightness" value="50"/>
+			<param name="~contrast" value="50"/>
+			<param name="~saturation" value="50"/>
+			<param name="~gain" value="50"/>
+			<param name="~exposure" value="50"/>
+			<param name="~white_balance_red_v" value="50"/>
+			<param name="~white_balance_blue_u" value="50"/>
+		</node>
+		<!-- image rect -->
+		<!-- <node machine="$(arg veh)" ns="$(arg camera)" pkg="image_proc" type="image_proc" name="image_proc" output="screen"/> -->
+
+		<!-- Line detector on laptop -->
+		<node pkg="line_detector" type="line_detector_node.py" name="line_detector" output="screen">
+			<!-- <remap from="~image" to="rosberrypi_cam/image_rect_color"/> -->
+			<remap from="~image" to="rosberrypi_cam/image_raw"/>
+		</node>
+
+		<!-- Ground projection -->
+		<node pkg="ground_projection" type="ground_projection" name="ground_projection" output="screen">
+			<remap from="~lineseglist_in" to="line_detector/segment_list"/>
+
+			<rosparam command="load" file="$(find ground_projection)/homography.yaml"/>
+			<param name="~homography_file" value="package://ground_projection/homography.yaml"/>
+			<param name="~board_w" value="7"/>
+			<param name="~board_h" value="5"/>
+			<param name="~square_size" value="0.031"/>
+			<param name="~x_offset" value="0.191"/>
+			<param name="~y_offset" value="-0.093"/>
+		</node>
+
+		<!-- Duckiebot visualizer -->
+		<node name="duckiebot_visualizer" pkg="duckiebot_visualizer" type="duckiebot_visualizer.py" output="screen">
+			<param name="~veh_name" value="$(arg veh)"/>
+			<remap from="~segment_list" to="ground_projection/lineseglist_out"/>
+		</node>
+
+		<!--  Lane filter on laptop -->
+		<node pkg="lane_filter" type="lane_filter_node.py" name="lane_filter">
+			<remap from="~segment_list" to="ground_projection/lineseglist_out"/>
+		</node>
+
+		<!-- Launch lane_controller on laptop -->
+		<node pkg="lane_control" type="lane_controller.py" name="lane_controller" output="screen" >
+			<remap from="~lane_reading" to="lane_filter/lane_pose"/>
+			<param name="~v_bar" value="0.2"/>
+			<param name="~k_d" value="-4.0"/>
+			<param name="~k_theta" value="-2.0"/>
+			<param name="~theta_thres" value="0.523"/>
+			<param name="~d_thres" value="0.2615"/>
+		</node>
+
+		<!-- Joy on veh -->
+		<node machine="$(arg veh)" pkg="joy" type="joy_node" name="joy" output="screen">
+		    <param name="~dev" value="/dev/input/js0"/>
+		    <param name="~deadzone" value="0.1"/>
+		</node>
+		<!-- Joy mapper on laptop -->
+		<node pkg="joy_mapper" type="joy_mapper.py" name="joy_mapper" output="screen">
+			<param name="~pub_timestep" value="0.02"/>
+		</node>
+
+		<!-- Launch car_supervisor on laptop  -->
+		<node pkg="car_supervisor" type="car_supervisor.py" name="car_supervisor" output="screen">
+	        <param name="~pub_timestep" value="0.02"/>
+			<param name="~joystick_mode" value="$(arg joy_mode)"/>
+			<remap from="~joy_control" to="joy_mapper/joy_control"/>
+			<remap from="~lane_control" to="lane_controller/lane_control"/>
+		</node>
+
+		<!-- dagu_car -->
+		<node machine="$(arg veh)" pkg="dagu_car" type="dagu_differential_drive.py" name="dagu_car" output="screen">
+			<remap from="~car_control" to="car_supervisor/car_control"/>
+			<param name="~car_like_mode" value="false"/>
+		</node>
+		
+	</group>
+</launch>

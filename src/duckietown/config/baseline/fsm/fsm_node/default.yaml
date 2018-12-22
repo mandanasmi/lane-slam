@@ -1,0 +1,195 @@
+# Initail state of the FSM
+initial_state: "JOYSTICK_CONTROL"
+
+events: #Maps from subscribing topic to signal ids
+  joystick_override_on: 
+    topic: "joy_mapper_node/joystick_override"
+    msg_type: "BoolStamped"
+    trigger: True
+  joystick_override_off: 
+    topic: "joy_mapper_node/joystick_override"
+    msg_type: "BoolStamped"
+    trigger: False
+  parallel_autonomy_on:
+    topic: "joy_mapper_node/parallel_autonomy"
+    msg_type: "BoolStamped"
+    trigger: True
+  parallel_autonomy_off:
+    topic: "joy_mapper_node/parallel_autonomy"
+    msg_type: "BoolStamped"
+    trigger: False
+  start_avoidance:
+    topic: "joy_mapper_node/start_avoidance"
+    msg_type: "BoolStamped"
+    trigger: True
+  at_stop_line:
+    topic: "stop_line_filter_node/at_stop_line"
+    msg_type: "BoolStamped"
+    trigger: True
+  intersection_go:
+    topic: "simple_coordinator_node/intersection_go"
+    msg_type: "BoolStamped"
+    trigger: True
+  intersection_done:
+    topic: "open_loop_intersection_control_node/intersection_done"
+    msg_type: "BoolStamped"
+    trigger: True
+  intersection_done_and_not_parallel_autonomy:
+    topic: "logic_gate_node/intersection_done_and_not_parallel_autonomy"
+    msg_type: "BoolStamped"
+    trigger: True
+  intersection_done_and_parallel_autonomy:
+    topic: "logic_gate_node/intersection_done_and_parallel_autonomy"
+    msg_type: "BoolStamped"
+    trigger: True
+  obstacle_detection:
+    topic: "obstacle_safety_node/object_too_close"
+    msg_type: "BoolStamped"
+    trigger: True
+  obstacle_cleared:
+    topic: "obstacle_safety_node/object_too_close"
+    msg_type: "BoolStamped"
+    trigger: False
+  vehicle_detection:
+    topic: "vehicle_avoidance_control_node/vehicle_detected"
+    msg_type: "BoolStamped"
+    trigger: True
+  vehicle_cleared:
+    topic: "vehicle_avoidance_control_node/vehicle_detected"
+    msg_type: "BoolStamped"
+    trigger: False
+#  lost_lane: # not tested
+#    topic: "lane_filter_node/in_lane"
+#    msg_type: "BoolStamped"
+#    trigger: False
+#  found_lane: # note tested
+#    topic: "lane_filter_node/in_lane"
+#    msg_type: "BoolStamped"
+#    trigger: True
+#  lane_recovery_timeout_reached: #not currently implemented
+#    topic: "lane_recovery_node/timeout_reached"
+#    msg_type: "BoolStamped"
+#    trigger: True
+#  intersection_complete_no_lane:
+#    topic: "logic_gate_node/intersection_complete_no_lane" # not currently implemented
+#    msg_type: "BoolStamped"
+#    trigger: True
+
+# Define global transitions. Available from all states.
+global_transitions:
+  joystick_override_on: "JOYSTICK_CONTROL"
+  parallel_autonomy_on: "PARALLEL_AUTONOMY"
+  parallel_autonomy_off: "JOYSTICK_CONTROL"
+
+# Define nodes 
+nodes:
+  decoder_node: "decoder_node/switch"
+# anti_instagram_node: "anti_instagram/switch"
+  apriltag_node: "apriltag_detector_node/switch"
+  vehicle_detector_node: "vehicle_detection_node/switch"
+  led_detector_node: "LED_detector_node/switch"
+  led_emitter_node: "led_emitter_node/switch"
+  static_object_detector_node: "static_object_detector_node/switch"
+  line_detector_node: "line_detector_node/switch"
+  lane_filter_node: "lane_filter_node/switch"
+  stop_line_filter_node: "stop_line_filter_node/switch"
+  framerate_high: "camera_node/framerate_high_switch"
+
+# Define state transitions
+states:
+  JOYSTICK_CONTROL:
+    transitions:
+      joystick_override_off: "LANE_FOLLOWING"
+      start_avoidance: "LANE_FOLLOWING_AVOID"
+    active_nodes:
+      - lane_filter_node
+      - line_detector_node
+      - stop_line_filter_node
+      - framerate_high
+      - decoder_node
+      - apriltag_node
+    lights: ["joystick"]
+  PARALLEL_AUTONOMY:
+    transitions:
+      vehicle_detection: "AVOID_VEHICLE"
+      at_stop_line: "COORDINATION"
+    active_nodes:
+      - vehicle_detector_node
+      - static_object_detector_node
+      - lane_filter_node
+      - line_detector_node
+      - stop_line_filter_node
+      - decoder_node # remove if not doing vehicle / object avoidance
+    lights: ["parallel_autonomy"]
+  LANE_FOLLOWING:
+    transitions:
+      at_stop_line: "COORDINATION"
+#      lost_lane: "LANE_RECOVERY"
+    active_nodes:
+      - lane_filter_node
+      - line_detector_node
+      - stop_line_filter_node
+    lights: ["lane_following"]
+  LANE_FOLLOWING_AVOID:
+    transitions:
+      at_stop_line: "COORDINATION"
+      vehicle_detection: "AVOID_VEHICLE"
+      obstacle_detection: "AVOID_OBSTACLE"
+#      lost_lane: "LANE_RECOVERY"
+    active_nodes:
+      - vehicle_detector_node
+      - static_object_detector_node
+      - lane_filter_node
+      - line_detector_node
+      - stop_line_filter_node
+      - decoder_node # remove if not doing vehicle / object avoidance
+    lights: ["lane_following"]
+  COORDINATION:
+    transitions:
+      intersection_go: "INTERSECTION_CONTROL"
+    active_nodes:
+      - apriltag_node
+      - led_detector_node
+      - led_emitter_node
+      - decoder_node
+      - framerate_high
+    lights: ["coordination"]
+  INTERSECTION_CONTROL:
+    transitions:
+#      intersection_done_and_not_parallel_autonomy: "LANE_FOLLOWING"
+#      intersection_done_and_parallel_autonomy: "PARALLEL_AUTONOMY"
+      intersection_done: "LANE_FOLLOWING"
+    active_nodes:
+      - line_detector_node
+      - lane_filter_node
+      - apriltag_node
+      - decoder_node
+      - led_emitter_node
+  AVOID_VEHICLE:
+    transitions:
+      vehicle_cleared: "PARALLEL_AUTONOMY"
+    active_nodes:
+      - vehicle_detector_node
+      - decoder_node
+    lights: ["avoid_vehicle"]
+  AVOID_OBSTACLE:
+    transitions:
+      obstacle_cleared: "LANE_FOLLOWING_AVOID"
+    active_nodes:
+      - static_object_detector_node
+      - decoder_node
+    lights: ["avoid_obstacle"]
+  LANE_RECOVERY: # not implemented
+    transitions:
+      found_lane: "LANE_FOLLOWING"
+      lane_recovery_timeout_reached: "JOYSTICK_CONTROL"
+    active_nodes:
+      - lane_filter_node
+      - line_detector_node
+  INTERSECTION_RECOVERY: # not implemented
+    transitions:
+      found_lane: "LANE_FOLLOWING"
+      intersection_recovery_timeout_reached: "JOYSTICK_CONTROL"
+    active_nodes:
+      - lane_filter_node
+      - line_detector_node

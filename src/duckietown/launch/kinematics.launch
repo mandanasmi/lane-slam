@@ -1,0 +1,50 @@
+<launch>
+    <arg name="veh" doc="Name of vehicle. ex: megaman"/>
+    <arg name="local" default="true" doc="true for running everything you possibly can on laptop. false for everything running on vehicle."/>
+    <arg name="config" default="baseline" doc="Specify a config."/>
+    <arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+    <arg name="learning_sensor_node" default="vicon_learning_node" /> <!-- change this to visual odometry node when it's ready -->
+    <arg name="drive" default="true"/>
+
+    <!-- run forward_kinematics_node -->
+    <remap from="forward_kinematics_node/wheels_cmd" to="wheels_driver_node/wheels_cmd_executed" />
+    <remap from="forward_kinematics_node/theta_dot_weights" to="kinematics_learning_node/theta_dot_kinematics_weights" />
+    <remap from="forward_kinematics_node/v_weights" to="kinematics_learning_node/v_kinematics_weights" />
+    <include file="$(find kinematics)/launch/forward_kinematics_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+        <arg name="param_file_name" value="$(arg param_file_name)"/>
+    </include>
+
+    <!-- run inverse_kinematics_node -->
+    <remap from="inverse_kinematics_node/wheels_cmd" to="wheels_driver_node/wheels_cmd" />
+    <remap unless="$(arg drive)" from="wheels_driver_node/wheels_cmd" to="wheels_driver_node/wheels_cmd_executed" />
+    <remap from="inverse_kinematics_node/theta_dot_weights" to="kinematics_learning_node/theta_dot_kinematics_weights" />
+    <remap from="inverse_kinematics_node/v_weights" to="kinematics_learning_node/v_kinematics_weights" />
+    <include file="$(find kinematics)/launch/inverse_kinematics_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+        <arg name="param_file_name" value="$(arg param_file_name)"/>
+    </include>
+
+    <!-- run the kinematics_learner_node -->
+    <remap from="kinematics_learning_node/v_sample" to="$(arg learning_sensor_node)/v_sample" />
+    <remap from="kinematics_learning_node/theta_dot_sample" to="$(arg learning_sensor_node)/theta_dot_sample" />
+    <include file="$(find kinematics)/launch/kinematics_learning_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+        <arg name="param_file_name" value="$(arg param_file_name)"/>
+    </include>
+
+    <!-- run the position_filter_node -->
+    <remap from="position_filter_node/velocity" to="forward_kinematics_node/velocity" />
+    <include file="$(find kinematics)/launch/position_filter_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+        <arg name="param_file_name" value="$(arg param_file_name)"/>
+    </include>
+</launch>

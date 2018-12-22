@@ -1,0 +1,11 @@
+<launch>
+	<arg name="veh"/>
+	<arg name="bag_name"/>
+	<arg name="vicon" default="false"/>
+	<include file="$(find duckietown)/machines"/>
+	<group ns="$(arg veh)">
+		<node unless="$(arg vicon)" machine="$(arg veh)" name="bag_recorder" pkg="rosbag" type="record" args="-e /$(arg veh)/.* -O /mnt/logs/$(arg bag_name)_$(arg veh).bag"/>
+		
+		<node if="$(arg vicon)" pkg="rosbag" type="record" name="bag_recorder" args="-e /$(arg veh)/.* -O /home/shihyuan/bags/$(arg bag_name)_$(arg veh).bag"/>
+	</group>
+</launch>

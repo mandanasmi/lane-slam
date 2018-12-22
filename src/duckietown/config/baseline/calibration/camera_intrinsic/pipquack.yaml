@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [319.170885343508, 0.0, 347.489399793102, 0.0, 322.82109052899625, 240.89136089577443,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: pipquack/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.26902857857184465, 0.047788247575737755, -0.0011623533963025302, -0.001506461645571337,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [213.87020874023438, 0.0, 340.3655487272008, 0.0, 0.0, 259.00665283203125,
+    239.412975390278, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

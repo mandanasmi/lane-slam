@@ -1,0 +1,22 @@
+mode_topic: "fsm_node/mode"
+source_topics: #Mapping from cmd source name to topics
+  lane: "lane_controller_node/car_cmd"
+  intersection: "open_loop_intersection_control_node/car_cmd"
+  coordination: "simple_coordinator_node/car_cmd"
+  joystick: "joy_mapper_node/car_cmd"
+  vehicle:  "vehicle_avoidance_control_node/car_cmd"
+  obstacle: "simple_stop_controller_node/car_cmd"
+  parallel_autonomy: "lane_supervisor_node/car_cmd"
+  recovery: "lane_recovery_node/car_cmd" # not implemented yet
+mappings: #Mapping from FSMStates.state to cmd source names. Allows different FSM mode to use the same source.
+  LANE_FOLLOWING: "lane"
+  LANE_FOLLOWING_AVOID: "lane"
+  INTERSECTION_CONTROL: "intersection"
+  COORDINATION: "coordination"
+  JOYSTICK_CONTROL: "joystick"
+  AVOID_OBSTACLE: "obstacle"
+  AVOID_VEHICLE:    "vehicle"
+  LANE_RECOVERY:     "recovery"
+  INTERSECTION_RECOVERY: "recovery"
+  PARALLEL_AUTONOMY: "parallel_autonomy"  
+  LOCALIZATION: "stop"

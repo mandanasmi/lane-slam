@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [315.1285007704995, 0.0, 323.06963806572816, 0.0, 320.0966359930082, 218.01258084028143,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: starducks/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.28048157543793056, 0.05674481026365553, -0.000988764087143394, -0.00026869128565781613,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [217.48876953125, 0.0, 321.3154072384932, 0.0, 0.0, 250.71084594726562, 202.30416165274983,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

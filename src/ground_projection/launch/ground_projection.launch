@@ -1,0 +1,30 @@
+<launch>
+  <arg name="veh" doc="Name of vehicle. ex: megaman"/>
+  <arg name="local" default="false" doc="true for running everything you possibly can on laptop. false for everything running on vehicle."/>
+  <arg name="config" default="baseline" doc="Specify a config."/>
+  <arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+  <arg name="camera_topic" default="camera_node"/>
+  <!-- <arg name="rectify" default="false" doc="If set to true, rectify image before process."/> -->
+
+  <include file="$(find duckietown)/machines"/>
+  <group ns="$(arg veh)">
+
+    <!-- run local -->
+    <node if="$(arg local)"  pkg="ground_projection" type="ground_projection_node.py" name="ground_projection" output="screen" clear_params="true" required="true">
+      <param name="~config" value="$(arg config)"/>
+      <param name="~config_file_name" value="$(arg veh)"/>
+      <remap from="~lineseglist_in" to="line_detector_node/segment_list"/>
+      <remap from="~cali_image" to="$(arg camera_topic)/image/raw"/>
+      <remap from="~camera_info" to="$(arg camera_topic)/camera_info"/>
+    </node>
+
+    <!-- run remote -->
+    <node unless="$(arg local)" machine="$(arg veh)" pkg="ground_projection" type="ground_projection_node.py" name="ground_projection" output="screen" clear_params="true" required="true">
+      <param name="~config" value="$(arg config)"/>
+      <param name="~config_file_name" value="$(arg veh)"/>
+      <remap from="~lineseglist_in" to="line_detector_node/segment_list"/>
+      <remap from="~cali_image" to="$(arg camera_topic)/image/raw"/>
+      <remap from="~camera_info" to="$(arg camera_topic)/camera_info"/>
+    </node>
+  </group>
+</launch>

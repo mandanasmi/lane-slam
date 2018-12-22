@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [306.19061682580826, 0.0, 334.11787072426927, 0.0, 311.97644426169967, 224.09267939989485,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: maserati/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2592515848857224, 0.04720770853335733, -0.00302454599047641, 0.00026545785405374984,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [211.2845916748047, 0.0, 333.6084457366196, 0.0, 0.0, 246.14698791503906,
+    209.3579427781251, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

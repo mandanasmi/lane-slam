@@ -1,0 +1,7 @@
+<launch>
+	<arg name="veh"/>
+
+	<param name="$(arg veh)/decoder_node/publish_freq" value="10.0"/>
+
+	<node ns="$(arg veh)" pkg="camera_calibration" type="cameracalibrator.py" name="intrinsic_calibrator" args="--size 7x5 --square 0.031 image:=/$(arg veh)/camera_node/image/raw camera:=/$(arg veh)/camera_node"/>
+</launch>

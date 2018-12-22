@@ -1,0 +1,86 @@
+<launch>
+    <arg name="veh" doc="Name of vehicle. ex: megaman"/>
+    <arg name="local" default="false" doc="true for running on laptop. false for running on vehicle."/>
+    <arg name="config" default="baseline" doc="Specify a config."/>
+    <arg name="special_param_file_name" default="default" doc="Specify a param file. ex:megaman. Note that you will need a megaman.yaml in the config folder for every node you are launching. To test with only one megaman.yaml, the recommendation is to set this to default and then manually change the desired param file in the approprate rosparam tag below"/> 
+    <arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman. Note that you will need a megaman.yaml in the config folder for every node you are launching. To test with only one megaman.yaml, the recommendation is to set this to default and then manually change the desired param file in the approprate rosparam tag below"/> 
+
+    <arg name="test" default="false"/>
+
+    <include file="$(find duckietown)/machines"/>
+
+    <!-- closed loop intersection_controller -->
+    <remap from="~mode" to="fsm_node/mode"/>
+    <include file="$(find intersection_control)/launch/closed_loop_intersection_controller_node.launch">
+      <arg name="veh" value="$(arg veh)"/>        
+      <arg name="local" value="$(arg local)"/>        
+      <arg name="config" value="$(arg config)"/>        
+      <arg name="param_file_name" value="$(arg special_param_file_name)"/>        
+    </include>
+
+    <!-- Lane filter and everything before it -->
+    <include unless="$(arg test)" file="$(find duckietown)/launch/lane_filter.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+        <arg name="param_file_name" value="$(arg param_file_name)"/>        
+    </include>
+
+    <!-- Lane controller -->
+    <remap from="lane_controller_node/lane_pose" to="lane_filter_node/lane_pose"/>
+    <include unless="$(arg test)" file="$(find lane_control)/launch/lane_controller_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+        <arg name="param_file_name" value="$(arg param_file_name)"/>        
+    </include>
+
+    <!-- Wheels Cmd Switch -->
+    <!-- Wheels cmd switch topics defined in yaml file -->
+    <include file="$(find dagu_car)/launch/wheels_cmd_switch_node.launch">
+      <arg name="veh" value="$(arg veh)"/>        
+      <arg name="local" value="$(arg local)"/>        
+      <arg name="param_file_name" value="$(arg special_param_file_name)"/>        
+    </include>
+
+    <!-- Wheels Trimmer -->
+    <remap from="wheels_trimmer_node/wheels_cmd" to="wheels_cmd_switch_node/wheels_cmd"/>
+    <include file="$(find dagu_car)/launch/wheels_trimmer_node.launch">
+      <arg name="veh" value="$(arg veh)"/>
+      <arg name="local" value="$(arg local)"/>
+      <arg name="config" value="$(arg config)"/>
+      <arg name="param_file_name" value="$(arg param_file_name)"/>
+    </include>
+
+    <!-- Wheel Driver -->
+    <remap from="wheels_driver_node/wheels_cmd" to="wheels_trimmer_node/trimmed_wheels_cmd"/>    
+    <include unless="$(arg test)" file="$(find dagu_car)/launch/wheels_driver_node.launch">
+      <arg name="veh" value="$(arg veh)"/>
+    </include>
+    
+    <!-- FSM -->
+    <!-- FSM topics defined in yaml file. -->
+    <include file="$(find fsm)/launch/fsm_node.launch">
+      <arg name="veh" value="$(arg veh)"/>        
+      <arg name="local" value="$(arg local)"/>        
+      <arg name="config" value="$(arg config)"/>        
+      <arg name="param_file_name" value="$(arg special_param_file_name)"/>        
+    </include>
+
+    <!-- Vehicle Coordinator -->
+    <remap from="veh_coordinator_node/mode" to="fsm_node/mode" />
+    <include file="$(find veh_coordinator)/launch/veh_coordinator_node.launch">
+      <arg name="veh" value="$(arg veh)"/>        
+      <arg name="local" value="$(arg local)"/>        
+      <arg name="config" value="$(arg config)"/>        
+      <arg name="param_file_name" value="$(arg param_file_name)"/>        
+    </include>
+
+    <!-- Fake inputs for Vehicle Coordinator -->
+    <include file="$(find veh_coordinator)/launch/fake_intersection_detection.launch">
+      <arg name="veh" value="$(arg veh)"/>        
+      <arg name="local" value="$(arg local)"/>        
+      <arg name="config" value="$(arg config)"/>        
+    </include>
+
+</launch>

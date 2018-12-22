@@ -1,0 +1,20 @@
+image_width: 640
+image_height: 480
+camera_name: /pontiac/rosberrypi_cam
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [340.0747037880638, 0, 300.8932236709628, 0, 345.0147796419568, 225.1617893363144, 0, 0, 1]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [-0.3425329008456545, 0.08189151825981239, -0.001529646840219255, 0.004191247533830971, 0]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [234.1089019775391, 0, 305.2516677568947, 0, 0, 266.083251953125, 211.929829922723, 0, 0, 0, 1, 0]

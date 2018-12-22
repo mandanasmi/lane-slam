@@ -1,0 +1,62 @@
+<launch>
+    <arg name="veh"/>
+    <arg name="bagin" doc="the full path to the input bag"/>
+    <arg name="bagout" doc="the full path to the output bag"/>
+    <arg name="local" default="true" doc="true for running everything you possibly can on laptop. false for everything running on vehicle."/>
+    <arg name="config" default="baseline" doc="Specify a config."/>
+    <arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman."/>
+    <arg name="gui" default="true" doc="Show a gui automatically when running this test" />
+    <arg name="log" default="false" doc="True to use the bagout arg to save a log" />
+    <arg name="learn_online" default="true" doc="True to update the weights from the vicon data online" />
+
+    <param name="use_sim_time" value="true"/>
+
+    <!-- run main kinematics -->
+    <include file="$(find duckietown)/launch/kinematics.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+        <arg name="param_file_name" value="$(arg param_file_name)"/>
+        <arg name="learning_sensor_node" value="vicon_learning_node"/>
+    </include>
+
+    <!-- run the vicon_learning_node -->
+    <group if="$(arg learn_online)">
+        <remap from="vicon_learning_node/pose" to="/duckiecar/pose" />
+        <remap from="vicon_learning_node/wheels_cmd" to="wheels_driver_node/wheels_cmd_executed" />
+        <include file="$(find kinematics)/launch/vicon_learning_node.launch">
+            <arg name="veh" value="$(arg veh)"/>
+            <arg name="local" value="$(arg local)"/>
+            <arg name="config" value="$(arg config)"/>
+            <arg name="param_file_name" value="$(arg param_file_name)"/>
+        </include>
+    </group>
+
+    <!-- run the pose2d_to_path_node -->
+    <remap from="pose2d_to_path_node/pose" to="position_filter_node/pose" />
+    <remap from="pose2d_to_path_node/vicon_pose" to="/duckiecar/pose" />
+    <remap from="pose2d_to_path_node/weights" to="kinematics_learning_node/v_kinematics_weights" />
+    <include file="$(find kinematics)/launch/pose2d_to_path_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+    </include>
+
+    <!-- run the pose_to_path_node -->
+    <remap from="pose_to_path_node/pose" to="/duckiecar/pose" />
+    <include file="$(find kinematics)/launch/pose_to_path_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+    </include>
+
+    <!-- Link the veh frame to the vicon frame -->
+    <node pkg="tf" type="static_transform_publisher" name="link_vicon_veh" args="0 0 0 0 0 0 1 vicon $(arg veh) 100"/>
+
+    <group if="$(arg gui)">
+        <!-- run rviz -->
+        <node pkg="rviz" type="rviz" name="rviz" ns="$(arg veh)"
+              args="-f vicon -d $(find kinematics)/rviz/kinematics.rviz"/>
+    </group>
+
+    <!-- Start the bags -->
+    <node pkg="rosbag" type="play" name="rosbag_play" args="$(arg bagin) --clock /$(arg veh)/wheels_driver_node/wheels_cmd:=/$(arg veh)/wheels_driver_node/wheels_cmd_executed"/>
+    <node if="$(arg log)" pkg="rosbag" type="record" name="rosbag_record" args="-a  -O $(arg bagout)"/>
+
+</launch>

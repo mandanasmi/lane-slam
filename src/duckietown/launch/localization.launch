@@ -1,0 +1,27 @@
+<launch>
+	<arg name="veh" doc="Name of vehicle. ex: megaman"/>
+	<arg name="local" default="true" doc="true for running everything you possibly can on laptop. false for everything running on vehicle."/>
+	<arg name="config" default="baseline" doc="Specify a config."/>
+	<arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+
+    <arg name="gui" default="true" doc="Also launches a gui that displays the duckietown map and a duckiebot" />
+    <arg name="map_name" default="open_house_dp6" doc="The name of a map file to display (in duckietown_description/urdf)" />
+
+
+    <!-- duckietown_description -->
+    <include file="$(find duckietown_description)/launch/duckietown_description_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="gui" value="$(arg gui)"/>
+        <arg name="map_name" value="$(arg map_name)"/>
+    </include>
+
+    <!-- localization -->
+    <remap from="localization_node/apriltags" to="apriltags_postprocessing_node/apriltags_out"/>
+    <include file="$(find localization)/launch/localization_node.launch">
+		<arg name="veh" value="$(arg veh)"/>
+		<arg name="local" value="$(arg local)"/>
+		<arg name="config" value="$(arg config)"/>
+		<arg name="param_file_name" value="$(arg param_file_name)"/>
+    </include>
+
+</launch>

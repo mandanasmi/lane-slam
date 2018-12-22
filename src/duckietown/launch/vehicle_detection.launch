@@ -1,0 +1,22 @@
+<launch>
+	<arg name="veh" doc="Name of vehicle" />
+	<arg name="local" default="false" />
+
+	<!-- Camera -->
+	<include unless="$(arg local)" file="$(find duckietown)/launch/camera.launch">
+		<arg name="veh" value="$(arg veh)"/>
+	</include>
+
+
+	<!-- Vehicle Detection Package -->
+	<remap from="vehicle_detection_node/image" to="camera_node/image/compressed" />
+	<remap from="vehicle_detection_node/camera_info" to="camera_node/camera_info" />
+
+	<!-- Vehicle Detection Node -->
+	<include file="$(find vehicle_detection)/launch/vehicle_detection_node.launch">
+		<arg name="veh" value="$(arg veh)"/>
+		<arg name="local" value="$(arg local)" />
+	</include>
+	
+</launch>
+

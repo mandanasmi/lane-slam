@@ -1,0 +1,20 @@
+image_width: 640
+image_height: 480
+camera_name: /sonata/rosberrypi_cam
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [317.3056771032321, 0, 319.258980953745, 0, 320.0811906246113, 234.424211291441, 0, 0, 1]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [-0.2902350178152036, 0.06951665662354099, 0.002895172161259456, 0.0001103249818113347, 0]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [230.8817596435547, 0, 318.7996366372445, 0, 0, 255.3191223144531, 234.4977712630007, 0, 0, 0, 1, 0]

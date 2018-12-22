@@ -1,0 +1,121 @@
+<launch>
+    <arg name="veh" doc="Name of vehicle. ex: megaman"/>
+    <arg name="local" default="false" doc="true for running on laptop. false for running on vehicle."/>
+    <arg name="RRlocal" default="false" doc="true for running the robotRaconteur node locally. Otherwise launched on duckiebot." />
+    <arg name="config" default="baseline" doc="Specify a config."/>
+    <arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+    <arg name="port" default="0" doc="RobotRaconteur port number"/>
+    <arg name="lanefilter" default="true" doc="Enable the lanefilter (launch with false if lanefilter is not working)" />
+    <arg name="artags" default="true" doc="Enable AR Tag detection." />
+
+
+    <include file="$(find duckietown)/machines"/>
+    
+    <!-- duckie_rr_bridge/duckie_host  -->
+    <remap from="duckie_host/velocity" to="forward_kinematics_node/velocity" />
+    <remap from="duckie_host/pose" to="velocity_to_pose_node/pose" />
+    <remap from="duckie_host/image" to="camera_node/image/raw" />
+    <remap from="duckie_host/lane_pose" to="lane_filter_node/lane_pose" />
+    <!-- remap from="duckie_host/april" to="tag_detections" / -->
+    <remap from="duckie_host/april" to="apriltags_postprocessing_node/apriltags_out" />
+    <include file="$(find duckie_rr_bridge)/launch/duckie_host.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <!--arg name="local" value="$(arg local)"/ -->
+        <!--arg name="local" value="true"/ -->
+        <arg name="local" value="$(arg RRlocal)"/>
+        <arg name="port" value="$(arg port)"/> 
+    </include>
+ 
+    <!-- camera node -->
+    <include file="$(find duckietown)/launch/camera.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)" />
+        <arg name="config" value="$(arg config)"/>
+        <arg name="param_file_name" value="$(arg param_file_name)"/>
+        <arg name="raw" value="true"/>
+        <arg name="cam_info" value="true"/> 
+        <arg name="live" value="true"/>
+        <arg name="rect" value="true" />
+    </include>
+
+    <group if="$(arg lanefilter)">
+        <!-- Ground projection -->
+        <include file="$(find ground_projection)/launch/ground_projection.launch">
+         <arg name="veh" value="$(arg veh)"/>
+         <arg name="local" value="$(arg local)"/>
+         <arg name="config" value="$(arg config)"/>
+         <arg name="param_file_name" value="$(arg param_file_name)"/>
+         <arg name="camera_topic" value="camera_node"/>
+        </include>
+        
+        <!-- Line Detector -->
+        <remap from="line_detector_node/image" to="camera_node/image/compressed"/>
+        <include file="$(find line_detector)/launch/line_detector_node.launch">
+            <arg name="veh" value="$(arg veh)"/>
+            <arg name="local" value="$(arg local)"/>
+            <arg name="config" value="$(arg config)"/>
+            <arg name="param_file_name" value="$(arg param_file_name)"/>
+            <arg name="verbose" value="false" />
+        </include>
+
+        <!-- Lane Filter -->
+        <remap from="lane_filter_node/segment_list" to="ground_projection/lineseglist_out"/>
+        <remap from="lane_filter_node/velocity" to="forward_kinematics_node/velocity"/>
+        <include file="$(find lane_filter)/launch/lane_filter_node.launch">
+            <arg name="veh" value="$(arg veh)"/>
+            <arg name="local" value="$(arg local)"/>
+            <arg name="config" value="$(arg config)"/>
+            <arg name="param_file_name" value="$(arg param_file_name)"/>
+        </include>
+    </group>
+
+    <!--- run the april tags -->
+    <group if="$(arg artags)">
+    <remap from="image_rect" to="camera_node/image/rect" />
+    <remap from="camera_node/image/camera_info" to="camera_node/raw_camera_info" />
+        <include file="$(find apriltags_ros)/launch/apriltag_detector_node.launch">
+            <arg name="veh" value="$(arg veh)"/>
+            <arg name="local" value="$(arg local)"/>
+            <arg name="config" value="$(arg config)"/>
+            <arg name="param_file_name" value="$(arg param_file_name)"/>
+        </include>
+        
+        <remap from="apriltags_postprocessing_node/apriltags_in" to="tag_detections" />
+        <include file="$(find apriltags_ros)/launch/apriltags_postprocessing_node.launch">
+            <arg name="veh" value="$(arg veh)"/>
+            <arg name="local" value="$(arg local)"/>
+            <arg name="config" value="$(arg config)"/>
+            <arg name="param_file_name" value="$(arg param_file_name)"/>
+        </include>
+    </group>
+
+    <!-- run inverse_kinematics_node -->
+    <remap from="inverse_kinematics_node/car_cmd" to="duckie_host/car_cmd"/>
+    <remap from="inverse_kinematics_node/wheels_cmd" to="wheels_driver_node/wheels_cmd" />
+    <include file="$(find dagu_car)/launch/inverse_kinematics_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+    </include>
+
+    <!-- run forward_kinematics_node -->
+    <remap from="forward_kinematics_node/wheels_cmd" to="wheels_driver_node/wheels_cmd_executed" />
+    <include file="$(find dagu_car)/launch/forward_kinematics_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+    </include>
+
+    <!-- run the velocity_to_pose_node -->
+    <remap from="velocity_to_pose_node/velocity" to="forward_kinematics_node/velocity" />
+    <include file="$(find dagu_car)/launch/velocity_to_pose_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+    </include>
+
+    <!-- Wheels Driver -->
+    <include file="$(find dagu_car)/launch/wheels_driver_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+    </include>
+</launch>

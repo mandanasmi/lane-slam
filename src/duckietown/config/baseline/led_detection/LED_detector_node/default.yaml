@@ -1,0 +1,4 @@
+crop_rect_normalized: [0.05, 0.0, 1.0, 0.6]
+capture_time: 0.5
+cell_size: [18, 18]
+

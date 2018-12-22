@@ -1,0 +1,26 @@
+  # default parameters for forward_kinematics_node and inverse_kinematics_node
+  K_l:          28.6
+  K_r:          25.9
+  radius_l:     0.02
+  radius_r:     0.02
+  baseline_lr:  0.217
+  fi_theta_dot_function_param: Duty_fi_linear_no_constant
+  fi_v_function_param: Duty_fi_linear_no_constant
+  theta_dot_weights_param: [-1, 1]
+  v_weights_param: [1, 1]
+#  fi_theta_dot_function_param: Duty_fi_linear_no_constant
+#  fi_v_function_param: Duty_fi_linear_no_constant
+#  theta_dot_weights_param: [-1.0, 1.0]
+#  v_weights_param: [1.0, 1.0]
+  learner_duty_threshold: 0.2
+  learner_number_of_zero_entries: 10
+
+#  fi_theta_dot_function_param: Duty_fi_theta_dot_compound_linear
+#  fi_v_function_param: Duty_fi_v_compound_linear
+#  theta_dot_weights_param: [0.0, 0.5]
+#  v_weights_param: [0.0, 0.5]
+
+#  fi_theta_dot_function_param: Duty_fi_theta_dot_naive
+#  fi_v_function_param: Duty_fi_v_naive
+#  theta_dot_weights_param: [0.5]
+#  v_weights_param: [0.5]

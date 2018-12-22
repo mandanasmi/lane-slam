@@ -1,0 +1,41 @@
+LED_protocol:
+
+  colors: 
+    green: [0,1,0]
+    red: [1,0,0]
+    blue: [0,0,1]
+    white: [0,0,0]
+    yellow: [1,1,0]
+    purple: [1,0,1]
+    cyan: [0,1,1]
+    black: [0,0,0]
+
+  frequencies:
+    f1: &f1 7.8
+    f2: &f2 4
+    f3: &f3 5.7
+
+  signals:
+    CAR_SIGNAL_A:
+      frequency: *f1
+      color: "green"
+
+    CAR_SIGNAL_B:
+      frequency: *f2
+      color: "purple"
+
+    CAR_SIGNAL_C:
+      frequency: *f3
+      color: "yellow"
+
+    light_off:
+      frequency: *f1
+      color: "black"
+
+    traffic_light_go:
+      frequency: *f1
+      color: "green"
+
+    traffic_light_stop:
+      frequency: *f3
+      color: "red"

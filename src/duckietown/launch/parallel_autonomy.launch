@@ -1,0 +1,90 @@
+<launch>
+    <arg name="veh" doc="Name of vehicle. ex: megaman"/>
+    <arg name="local" default="false" doc="true for running on laptop. false for running on vehicle."/>
+    <arg name="config" default="baseline" doc="Specify a config."/>
+    <arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman. Note that you will need a megaman.yaml in the config folder for every node you are launching. To test with only one megaman.yaml, the recommendation is to set this to default and then manually change the desired param file in the approprate rosparam tag below"/> 
+    <arg name="use_vicon" default="false"/>
+    <arg name="drive" default="true"/>
+    <arg name="live" default="true" doc="if set to true, run the camera and do live detection. "/>
+
+
+    <include file="$(find duckietown)/machines"/>    
+
+    <group if="$(arg use_vicon)">
+        <remap from="vicon_for_lane_node/vicon_pose" to="pose"/>
+        <remap from="vicon_for_lane_node/lane_pose" to="lane_controller_node/lane_pose"/>
+        <include file="$(find lane_control)/launch/vicon_for_lane_node.launch">
+            <arg name="veh" value="$(arg veh)"/>
+            <arg name="local" value="$(arg local)"/>
+            <arg name="config" value="$(arg config)"/>
+            <arg name="param_file_name" value="$(arg param_file_name)"/>            
+        </include>
+    </group>
+
+    <!-- lane filter -->
+    <include file="$(find duckietown)/launch/lane_filter.launch">
+    	     <arg name="veh" value="$(arg veh)"/>
+	     <arg name="local" value="$(arg local)"/>
+	     <arg name="config" value="$(arg config)"/>
+	     <arg name="param_file_name" value="$(arg param_file_name)"/>
+	     <arg name="live" value="$(arg live)"/>
+    </include>
+
+    <!-- Lane controller -->
+    <remap from="lane_controller_node/lane_pose" to="lane_filter_node/lane_pose"/>
+    <include file="$(find lane_control)/launch/lane_controller_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+        <arg name="param_file_name" value="$(arg param_file_name)"/>        
+    </include>
+
+    <!-- joy -->
+    <node ns="$(arg veh)" if="$(arg local)" pkg="joy" type="joy_node" name="joy" output="screen">
+        <rosparam command="load" file="$(find duckietown)/config/$(arg config)/joy/joy_node/$(arg param_file_name).yaml"/>
+    </node>
+    <node ns="$(arg veh)" unless="$(arg local)" machine="$(arg veh)" pkg="joy" type="joy_node" name="joy" output="screen">
+        <rosparam command="load" file="$(find duckietown)/config/$(arg config)/joy/joy_node/$(arg param_file_name).yaml"/>
+    </node>
+
+    <!-- joy_mapper -->
+<!--    <remap unless="$(arg trim)" from="joy_mapper_node/wheels_cmd" to="wheels_driver_node/wheels_cmd"/> -->
+    <include file="$(find joy_mapper)/launch/joy_mapper_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+        <arg name="param_file_name" value="$(arg param_file_name)"/>
+    </include>
+
+
+    <remap from="lane_supervisor_node/lane_pose" to="lane_filter_node/lane_pose"/>
+    <remap from="lane_supervisor_node/wheels_control_joy" to="joy_mapper_node/wheels_cmd"/>
+    <remap from="lane_supervisor_node/wheels_control_lane" to="lane_controller_node/wheels_control"/>
+    <remap from="lane_supervisor_node/joy" to="joy"/>
+    <remap from="lane_supervisor_node/in_lane" to="lane_filter_node/in_lane"/>
+    <remap from="lane_supervisor_node/stop_line_reading" to="stop_line_filter_node/stop_line_reading"/>
+    <include file="$(find lane_control)/launch/lane_supervisor_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+        <arg name="param_file_name" value="$(arg param_file_name)"/>        
+    </include>
+
+    <group if="$(arg drive)">
+        <!-- Wheels Trimmer -->
+	<remap from="wheels_trimmer_node/wheels_cmd" to="lane_supervisor_node/wheels_control"/>
+        <include file="$(find dagu_car)/launch/wheels_trimmer_node.launch">
+            <arg name="veh" value="$(arg veh)"/>
+            <arg name="local" value="$(arg local)"/>
+            <arg name="config" value="$(arg config)"/>
+            <arg name="param_file_name" value="$(arg param_file_name)"/>
+        </include>
+
+        <!-- Wheel Driver -->
+        <remap from="wheels_driver_node/wheels_cmd" to="wheels_trimmer_node/trimmed_wheels_cmd"/>
+    	<include if="$(arg live)" file="$(find dagu_car)/launch/wheels_driver_node.launch">
+            <arg name="veh" value="$(arg veh)"/>
+        </include>
+    </group>
+
+</launch>

@@ -1,0 +1,8 @@
+# Parameters for joy_mapper/joy_mapper
+# speed_gain: 0.4293
+speed_gain: 0.41
+# steer_gain: 8.586
+steer_gain: 8.3
+bicycle_kinematics: 0.0
+steer_angle_gain: 1.04
+simulated_vehicle_length: 0.18

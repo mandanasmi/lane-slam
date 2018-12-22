@@ -1,0 +1,5 @@
+# default parameters for lane_filter/traffic_traffic_node
+traffic_light_list: [1,3,2,0]
+allred_duration: 4
+greenlight_duration: 5
+# the frequencies are read from LED_protocol.yaml in led_interpreter package config folder

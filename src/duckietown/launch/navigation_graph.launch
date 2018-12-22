@@ -1,0 +1,26 @@
+<launch>
+    <arg name="map_name" default="duckietown_map.pkl" />
+    <arg name="draw_solution" default="False" />
+	<param name="map_name" value="$(arg map_name)" />
+	<param name="draw_solution" value="$(arg draw_solution)" />
+    <arg name="veh" doc="Name of vehicle. ex: megaman"/>
+    <arg name="local" default="false" doc="true for running on laptop. false for running on vehicle."/>
+    <arg name="config" default="baseline" doc="Specify a config."/>
+    <arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman. Note that you will need a megaman.yaml in the config folder for every node you are launching. To test with only one megaman.yaml, the recommendation is to set this to default and then manually change the desired param file in the approprate rosparam tag below"/> 
+    
+    <remap from="~mode" to="fsm_node/mode"/>
+    <include file="$(find navigation)/launch/graph_search_server.launch">
+      <arg name="map_name" value="$(arg map_name)"/>        
+      <arg name="draw_solution" value="$(arg draw_solution)"/>   
+      <arg name="veh" value="$(arg veh)"/>   
+    </include>
+    
+    <remap from="~turn_type" to="actions_dispatcher/turn_type" />
+    <include file="$(find duckietown)/launch/navigation.launch">
+      <arg name="veh" value="$(arg veh)"/>        
+      <arg name="local" value="$(arg local)"/>        
+      <arg name="config" value="$(arg config)"/>        
+      <arg name="param_file_name" value="$(arg param_file_name)"/>        
+    </include>
+
+</launch>

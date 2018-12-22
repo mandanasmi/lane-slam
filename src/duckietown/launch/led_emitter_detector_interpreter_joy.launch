@@ -1,0 +1,47 @@
+<launch>
+	<arg name="veh" doc="Name of vehicle. ex: megaman"/>
+	<arg name="loc" default="-1" doc="Physical room location of the duckietown map. E.g. 226 or 316"/>
+	<arg name="local" default="false" doc="true for running everything you possibly can on laptop. false for everything running on vehicle."/>
+	<arg name="config" default="baseline" doc="Specify a config."/>
+	<arg name="pre_param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+	<arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+	<arg name="pos_param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+	<arg name="raw" default="true" doc="If set to true, also publish raw image using decoder."/> 
+	<arg name="live" default="true" doc="if set to true, run the camera and do live detection. "/>
+	<arg name="camera" default="true" doc="If set to false, won't launch the camera. This is for easier relaunching of the line_detector_node only "/>
+	<arg name="intersectionType" default="trafficLight" doc="obviuos :P"/>
+
+
+	<!-- Camera -->
+	<include if="$(arg camera)" file="$(find duckietown)/launch/camera.launch">
+		<arg name="veh" value="$(arg veh)"/>
+		<arg name="local" value="$(arg local)"/>
+		<arg name="config" value="$(arg config)"/>
+		<arg name="raw" value="$(arg raw)"/>
+		<arg name="cam_info" value="true"/> <!-- this should possible change later when we take logs without camera info but let's leave for now -->
+		<arg name="live" value="$(arg live)"/>
+	</include>
+
+	<!-- LED Joy mapper -->
+	<include file="$(find led_joy_mapper)/launch/led_joy_with_led_emitter_test.launch">
+	    <arg name="veh" value="$(arg veh)"/>
+	    <arg name="local" value="$(arg local)"/>
+	    <arg name="config" value="$(arg config)"/>
+	</include>	
+
+	<!-- LED detector -->
+	<include file="$(find led_detection)/launch/LED_detection.launch">
+	    <arg name="veh" value="$(arg veh)"/>
+	    <arg name="local" value="$(arg local)"/>
+	    <arg name="config" value="$(arg config)"/>
+	</include>
+
+	<!-- LED interpreter --> 
+	<remap from="LED_interpreter_node/raw_led_detection" to="LED_detector_node/raw_led_detection" />
+	<include file="$(find led_interpreter)/launch/LED_interpreter.launch">
+		<arg name="veh" value="$(arg veh)"/>
+	    	<arg name="local" value="$(arg local)"/>
+	    	<arg name="config" value="$(arg config)"/>
+	    	<arg name="intersectionType" value="$(arg intersectionType)"/>
+	</include>
+</launch>

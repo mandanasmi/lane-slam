@@ -1,0 +1,6 @@
+
+initial_mode: JOYSTICK_CONTROL
+localization_mode: LOCALIZATION
+trigger_mode: INTERSECTION_CONTROL
+reset_mode: JOYSTICK_CONTROL
+stop_line_wait_time: 1.0

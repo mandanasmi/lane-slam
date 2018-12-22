@@ -1,0 +1,23 @@
+img_size: [120,160]
+top_cutoff: 40
+
+# should be an array of 2 elements. The first is the name of the class
+# and the second should be the parameters. 
+# The class should be an abstract instance of LineDetectorInterface
+detector: 
+  - line_detector.LineDetectorHSV
+  - configuration:
+      dilation_kernel_size: 3
+      canny_thresholds: [80,200]
+      hough_threshold: 2
+      hough_min_line_length: 3
+      hough_max_line_gap:    1
+     
+      hsv_white1:  [0,0,150]
+      hsv_white2:  [180,60,255]
+      hsv_yellow1: [25,140,100]
+      hsv_yellow2: [45,255,255]
+      hsv_red1:    [0,140,100]
+      hsv_red2:    [15,255,255]
+      hsv_red3:    [165,140,100]
+      hsv_red4:    [180,255,255]

@@ -1,0 +1,6 @@
+# Parameters for joy/joy_node
+dev: /dev/input/js0
+deadzone: 0.01
+autorepeat_rate: 2.0
+coalesce_interval: 0.02
+

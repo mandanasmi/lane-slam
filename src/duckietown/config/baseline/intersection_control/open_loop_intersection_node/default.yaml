@@ -1,0 +1,17 @@
+# Parameters for open_loop_intersection_node
+# #Turn right through intersection
+turn_left: #time, velocity, angular vel
+  - [0.8, 0.43, 0]
+  - [1.8, 0.43, 2.896]
+  - [0.8, 0.43, 0.0]
+turn_right:
+  - [0.6, 0.43, 0]
+  - [1.2, 0.3, -4.506]
+  - [1.0, 0.43, 0.0]
+turn_forward:
+  - [0.8, 0.43, 0.4]
+  - [1.0, 0.43, 0.0]
+  - [1.0, 0.43, 0.0]
+
+#do we want to update the values based on where/what angle we stop at.
+trajectory_reparam: 0

@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+from duckieteam.cli.create_machines import CreateMachines
+from duckietown_utils.cli import d8app_run
+
+if __name__ == '__main__':
+    d8app_run(CreateMachines)

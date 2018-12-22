@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [316.8933415791567, 0.0, 321.70733325450885, 0.0, 319.6307163026834, 245.97717752973088,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: miata/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2488732421275252, 0.03863535592842995, 0.00031446701269484997, 0.0014264000097088151,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [205.87840270996094, 0.0, 320.57715045233635, 0.0, 0.0, 260.75579833984375,
+    249.38896887804003, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

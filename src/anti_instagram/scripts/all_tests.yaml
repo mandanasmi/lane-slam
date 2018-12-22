@@ -1,0 +1,227 @@
+allblinking_test1-argo:
+  # how to create the test data
+  data:
+    # change this path locally if needed (TODO more portable solution?)
+    bag: "~/Dropbox (MIT)/duckietown-data/logs/Phase_2/F23/Meeting_1_Logs/allblinking_test1/20160312-allblinking_test1-argo.bag"
+    interval: [0, 3]
+  # what to query for
+  query:
+    frequencies_to_detect: [1.0, 1.5, 2.0]
+    min_distance_between_LEDs_pixels: 5         
+
+  # what we expect to see
+  expected: 
+  - 
+    timestamp1: 0
+    timestamp2: 3
+    image_coordinates: [249, 192]
+    image_coordinates_margin: 20 # pixels
+    frequency: 1.0
+    # color: 'r'
+    # color_tolerance: 0.1
+    confidence_min: 0.9
+  - 
+    timestamp1: 0
+    timestamp2: 3
+    image_coordinates: [268, 115]
+    image_coordinates_margin: 20 # pixels
+    frequency: 1.5
+    # color: 'r'
+    # color_tolerance: 0.1
+    confidence_min: 0.9
+  - 
+    timestamp1: 0
+    timestamp2: 3
+    image_coordinates: [520, 199]
+    image_coordinates_margin: 20 # pixels
+    frequency: 1.0
+    # color: 'r'
+    # color_tolerance: 0.1
+    confidence_min: 0.9
+
+allblinking_test3-argo:
+  data:
+    # change this path locally if needed (TODO more portable solution?)
+    bag: "~/Dropbox (MIT)/duckietown-data/logs/Phase_2/F23/Meeting_1_Logs/allblinking_test3/20160312-allblinking_test3-argo.bag"
+    interval: [0, 3]
+  query:
+    frequencies_to_detect: [2.5, 3.0, 4.0]
+    min_distance_between_LEDs_pixels: 5         
+  expected: 
+  - 
+    timestamp1: 0
+    timestamp2: 3
+    image_coordinates: [252, 190]
+    image_coordinates_margin: 20 # pixels
+    frequency: 2.5
+    # color: 'w'
+    # color_tolerance: 0.1
+    confidence_min: 0.9
+  - 
+    timestamp1: 0
+    timestamp2: 3
+    image_coordinates: [268, 115]
+    image_coordinates_margin: 20 # pixels
+    frequency: 4.0
+    # color: 'g'
+    # color_tolerance: 0.1
+    confidence_min: 0.9
+  - 
+    timestamp1: 0
+    timestamp2: 3
+    image_coordinates: [520, 199]
+    image_coordinates_margin: 20 # pixels
+    frequency: 3.0
+    # color: 'w'
+    # color_tolerance: 0.1
+    confidence_min: 0.9
+
+allblinking_test4-argo:
+  data:
+    bag: "~/Dropbox (MIT)/duckietown-data/logs/Phase_2/F23/Meeting_1_Logs/allblinking_test4/20160312-allblinking_test4-argo.bag"
+    interval: [0, 3]
+  query:
+    frequencies_to_detect: [2, 2.5, 3.0]
+    min_distance_between_LEDs_pixels: 5         
+  expected: 
+  - 
+    timestamp1: 0
+    timestamp2: 3
+    image_coordinates: [252, 193]
+    image_coordinates_margin: 20 # pixels
+    frequency: 2.5
+    # color: 'w'
+    # color_tolerance: 0.1
+    confidence_min: 0.9
+  - 
+    timestamp1: 0
+    timestamp2: 3
+    image_coordinates: [271, 116]
+    image_coordinates_margin: 20 # pixels
+    frequency: 2.0
+    # color: 'b'
+    # color_tolerance: 0.1
+    confidence_min: 0.9
+  - 
+    timestamp1: 0
+    timestamp2: 3
+    image_coordinates: [516, 197]
+    image_coordinates_margin: 20 # pixels
+    frequency: 3.0
+    # color: 'w'
+    # color_tolerance: 0.1
+    confidence_min: 0.9
+
+allblinking_test1-maserati:
+  data:
+    # change this path locally if needed (TODO more portable solution?)
+    bag: "~/Dropbox (MIT)/duckietown-data/logs/Phase_2/F23/Meeting_1_Logs/allblinking_test1/20160312-allblinking_test1-maserati.bag"
+    interval: [0, 3]
+  # what to query for
+  query:
+    frequencies_to_detect: [1.0, 1.5, 2.0]
+    min_distance_between_LEDs_pixels: 5         
+
+  # what we expect to see
+  expected: 
+  - 
+    timestamp1: 0
+    timestamp2: 3
+    image_coordinates: [13, 208]
+    image_coordinates_margin: 20 # pixels
+    frequency: 2.0
+    # color: 'r'
+    # color_tolerance: 0.1
+    confidence_min: 0.9
+  - 
+    timestamp1: 0
+    timestamp2: 3
+    image_coordinates: [280, 60]
+    image_coordinates_margin: 20 # pixels
+    frequency: 1.5
+    # color: 'r'
+    # color_tolerance: 0.1
+    confidence_min: 0.9
+  - 
+    timestamp1: 0
+    timestamp2: 3
+    image_coordinates: [457, 154]
+    image_coordinates_margin: 20 # pixels
+    frequency: 1.0
+    # color: 'r'
+    # color_tolerance: 0.1
+    confidence_min: 0.9
+
+allblinking_test2-maserati:
+  data:
+    bag: "~/Dropbox (MIT)/duckietown-data/logs/Phase_2/F23/Meeting_1_Logs/allblinking_test2/20160312-allblinking_test2-maserati.bag"
+    interval: [0, 3]
+  query:
+    frequencies_to_detect: [1.0, 1.5, 2.0]
+    min_distance_between_LEDs_pixels: 5         
+  expected: 
+  - 
+    timestamp1: 0
+    timestamp2: 3
+    image_coordinates: [10, 208]
+    image_coordinates_margin: 20 # pixels
+    frequency: 2.0
+    # color: 'r'
+    # color_tolerance: 0.1
+    confidence_min: 0.9
+  - 
+    timestamp1: 0
+    timestamp2: 3
+    image_coordinates: [280, 60]
+    image_coordinates_margin: 20 # pixels
+    frequency: 1.5
+    # color: 'r'
+    # color_tolerance: 0.1
+    confidence_min: 0.9
+  - 
+    timestamp1: 0
+    timestamp2: 3
+    image_coordinates: [457, 154]
+    image_coordinates_margin: 20 # pixels
+    frequency: 1.0
+    # color: 'r'
+    # color_tolerance: 0.1
+    confidence_min: 0.9
+
+allblinking_test3-maserati:
+  data:
+    bag: "~/Dropbox (MIT)/duckietown-data/logs/Phase_2/F23/Meeting_1_Logs/allblinking_test3/20160312-allblinking_test3-maserati.bag"
+    interval: [0, 3]
+
+  query:
+    frequencies_to_detect: [2.0, 2.5, 3.0]
+    min_distance_between_LEDs_pixels: 5         
+
+  expected: 
+  - 
+    timestamp1: 0
+    timestamp2: 3
+    image_coordinates: [10, 208]
+    image_coordinates_margin: 20 # pixels
+    frequency: 3.0
+    # color: 'r'
+    # color_tolerance: 0.1
+    confidence_min: 0.9
+  - 
+    timestamp1: 0
+    timestamp2: 3
+    image_coordinates: [264, 68]
+    image_coordinates_margin: 20 # pixels
+    frequency: 2.0
+    # color: 'r'
+    # color_tolerance: 0.1
+    confidence_min: 0.9
+  - 
+    timestamp1: 0
+    timestamp2: 3
+    image_coordinates: [457, 154]
+    image_coordinates_margin: 20 # pixels
+    frequency: 2.5
+    # color: 'r'
+    # color_tolerance: 0.1
+    confidence_min: 0.9

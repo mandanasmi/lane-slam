@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="veh"/>
+  <arg name="institution" />
+  <arg name="include" default="(/$(arg veh)/camera_node/camera_info|/$(arg veh)/joy|/$(arg veh)/camera_node/image/compressed|/$(arg veh)/wheels_driver_node/wheels_cmd|/$(arg veh)/fsm_node/mode|/$(arg veh)/car_cmd_switch_node/cmd)"/>
+  <arg name="out_path" default="/media/logs"/>
+
+  <node pkg="rosbag" type="record" name="rosbag_record" args="-e $(arg include) -o $(arg out_path)/$(arg veh)_$(arg institution)"/>
+
+</launch>

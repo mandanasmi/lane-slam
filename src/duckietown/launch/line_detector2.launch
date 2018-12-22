@@ -1,0 +1,99 @@
+<launch>
+	<arg name="veh" doc="Vehicle name (e.g., 'ferrari')." default="$(env HOSTNAME)"/>
+    <arg name="proc" doc="Where to deploy the computation." default="$(arg veh)"/>
+    <arg name="config_sequence" default="$(env DUCKIETOWN_CONFIG_SEQUENCE)"/>
+    <include file="$(find duckietown)/machines"/>
+
+	<!-- Camera -->
+
+    <group ns="$(arg veh)">
+		<node machine="$(arg veh)"
+              pkg="pi_camera"
+              type="camera_node_sequence.py"
+              name="camera_node"
+              output="screen" clear_params="true" required="true">
+            <param name="config_sequence" value="$(arg config_sequence)"/>
+        </node>
+
+        <!-- Line Detector -->
+
+       <remap from="line_detector_node/image" to="camera_node/image/compressed"/>
+
+        <node   machine='$(arg proc)'
+                pkg='line_detector2'
+                type="line_detector_node2.py"
+                name="line_detector_node"
+                output="screen"
+                required="true">
+            <param name="config_sequence" value="$(arg config_sequence)"/>
+        </node>
+
+        <!-- decoder -->
+
+        <remap from="decoder_node/compressed_image" to="camera_node/image/compressed"/>
+        <remap from="decoder_node/image/raw" to="camera_node/image/raw"/>
+
+        <node  pkg="pi_camera"
+               type="decoder_node.py"
+               name="decoder_node"
+               output="screen" clear_params="true" required="true">
+            <param name="config_sequence" value="$(arg config_sequence)"/>
+        </node>
+
+        <!-- cam info reader -->
+
+        <remap from="cam_info_reader_node/camera_info" to="camera_node/camera_info"/>
+        <remap from="cam_info_reader_node/compressed_image" to="camera_node/image/compressed"/>
+
+        <node  pkg="pi_camera"
+               type="cam_info_reader_node.py"
+               name="cam_info_reader_node"
+               output="screen" clear_params="true" required="true">
+
+               <param name="config_sequence" value="$(arg config_sequence)"/>
+
+               <!-- <rosparam command="load" file="$(find duckietown)/config/$(arg config)/pi_camera/cam_info_reader_node/$(arg param_file_name).yaml"/> -->
+
+
+               <!-- <param name="~config" value="$(arg config)"/>
+       		   <param name="~cali_file_name" value="$(arg cali_file_name)"/>
+       		   <param name="~image_type" value="$(arg image_type)"/> -->
+        </node>
+
+        <remap from="image_proc_node/image_raw" to="camera_node/image/raw"/>
+        <remap from="image_proc_node/camera_info" to="camera_node/raw_camera_info"/>
+        <remap from="image_proc_node/image_rect_color" to="camera_node/image/rect" />
+
+        <node pkg='image_proc'
+              type='image_proc_node.py'
+              name='image_proc_node'
+              output="screen" clear_params="true" required="true">
+              <param name="config_sequence" value="$(arg config_sequence)"/>
+        </node>
+
+
+        <!-- <group if="$(arg raw)">
+            <remap from="raw_cam_info_reader_node/camera_info" to="camera_node/raw_camera_info"/>
+            <remap from="raw_cam_info_reader_node/compressed_image" to="camera_node/image/raw"/>
+            <include file="$(find pi_camera)/launch/cam_info_reader_node.launch">
+                <arg name="veh" value="$(arg veh)"/>
+                <arg name="local" value="$(arg local)"/>
+                <arg name="config" value="$(arg config)"/>
+                <arg name="param_file_name" value="$(arg param_file_name)"/>
+                <arg name="node_name" value="raw_cam_info_reader_node" />
+                <arg name="image_type" value="raw" />
+            </include>
+
+            <group if="$(arg rect)">
+                <remap from="image_raw" to="camera_node/image/raw"/>
+                <remap from="camera_info" to="camera_node/raw_camera_info"/>
+                <remap from="image_rect_color" to="camera_node/image/rect" />
+                <include file="$(find pi_camera)/launch/image_proc_node.launch">
+                    <arg name="veh" value="$(arg veh)"/>
+                    <arg name="local" value="$(arg local)"/>
+                </include>
+            </group>
+        </group>
+         -->
+    </group>
+</launch>

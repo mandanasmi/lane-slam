@@ -1,0 +1,68 @@
+<launch>
+    <arg name="veh" doc="Name of vehicle. ex: megaman"/>
+    <arg name="local" default="false" doc="true for running everything you possibly can on laptop. false for everything running on vehicle."/>
+    <arg name="config" default="baseline" doc="Specify a config."/>
+    <arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+    <arg name="raw" default="false" doc="If set to true, also publish raw image using decoder."/>
+    <arg name="cam_info" default="true" doc="If set to true, use cam_info_reader_node to pusblish CameraInfo."/>
+    <arg name="live" default="true" doc="live set to false means we don't run the actual camera (i.e. running from a log file" />
+    <arg name="rect" default="false" />
+
+    <!-- camera_node -->
+    <group if="$(arg live)">
+        <include  file="$(find pi_camera)/launch/camera_node.launch">
+            <arg name="veh" value="$(arg veh)"/>
+            <arg name="config" value="$(arg config)"/>
+            <arg name="param_file_name" value="$(arg param_file_name)"/>
+        </include>
+    </group>
+
+    <!-- decoder_node -->
+    <group if="$(arg raw)">
+        <remap from="decoder_node/compressed_image" to="camera_node/image/compressed"/>
+        <remap from="decoder_node/image/raw" to="camera_node/image/raw"/>
+        <include file="$(find pi_camera)/launch/decoder_node.launch">
+            <arg name="veh" value="$(arg veh)"/>
+            <arg name="local" value="$(arg local)"/>
+            <arg name="config" value="$(arg config)"/>
+            <arg name="param_file_name" value="$(arg param_file_name)"/>
+        </include>
+    </group>
+
+    <!-- cam_info_reader_node -->
+    <group if="$(arg cam_info)">
+        <remap from="cam_info_reader_node/camera_info" to="camera_node/camera_info"/>
+        <remap from="cam_info_reader_node/compressed_image" to="camera_node/image/compressed"/>
+        <include file="$(find pi_camera)/launch/cam_info_reader_node.launch">
+            <arg name="veh" value="$(arg veh)"/>
+            <arg name="local" value="$(arg local)"/>
+            <arg name="config" value="$(arg config)"/>
+            <arg name="param_file_name" value="$(arg param_file_name)"/>
+        </include>
+
+        <group if="$(arg raw)">
+            <remap from="raw_cam_info_reader_node/camera_info" to="camera_node/raw_camera_info"/>
+            <remap from="raw_cam_info_reader_node/compressed_image" to="camera_node/image/raw"/>
+            <include file="$(find pi_camera)/launch/cam_info_reader_node.launch">
+                <arg name="veh" value="$(arg veh)"/>
+                <arg name="local" value="$(arg local)"/>
+                <arg name="config" value="$(arg config)"/>
+                <arg name="param_file_name" value="$(arg param_file_name)"/>
+                <arg name="node_name" value="raw_cam_info_reader_node" />
+                <arg name="image_type" value="raw" />
+            </include>
+
+            <!-- Rectification -->
+            <group if="$(arg rect)">
+                <remap from="image_raw" to="camera_node/image/raw"/>
+                <remap from="camera_info" to="camera_node/raw_camera_info"/>
+                <remap from="image_rect_color" to="camera_node/image/rect" />
+                <include file="$(find pi_camera)/launch/image_proc_node.launch">
+                    <arg name="veh" value="$(arg veh)"/>
+                    <arg name="local" value="$(arg local)"/>
+                </include>
+            </group>
+        </group>
+    </group>
+
+</launch>

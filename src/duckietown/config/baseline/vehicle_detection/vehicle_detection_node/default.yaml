@@ -1,0 +1,7 @@
+circlepattern_dims:
+  cols: 2
+  data: [7, 3]
+  rows: 1
+blobdetector_min_area: 10
+blobdetector_min_dist_between_blobs: 2
+publish_circles: True

@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [320.01662303646305, 0.0, 309.2304795708444, 0.0, 322.50098821941157, 211.72347209268685,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: ferrari/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.27438022923425975, 0.05215872112103248, 0.0027000386512372036, -0.00018965250296526788,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [218.55433654785156, 0.0, 305.99888900374754, 0.0, 0.0, 255.05252075195312,
+    197.49049082263264, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

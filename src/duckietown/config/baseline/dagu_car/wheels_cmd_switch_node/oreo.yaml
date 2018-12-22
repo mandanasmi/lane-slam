@@ -1,0 +1,9 @@
+mode_topic: "fsm_node/mode"
+source_topics: #Mapping for name to topics
+  lane: "lane_controller_node/wheels_control"
+  intersection: "closed_loop_intersection_control_node/wheels_cmd"
+  coordination: "veh_coordinator_node/coordination_cmd"
+mappings: #Mapping from FSMStates.state to names
+  LANE_FOLLOWING: "lane"
+  INTERSECTION_CONTROL: "intersection"
+  COORDINATION: "coordination"

@@ -1,0 +1,20 @@
+image_width: 640
+image_height: 480
+camera_name: /tesla/rosberrypi_cam
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [313.4246002298228, 0, 310.0924793761861, 0, 323.3809036610438, 214.8491988593326, 0, 0, 1]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [-0.2507032413240272, 0.04170180613809141, -0.0009235050533103222, 0.003501889369560416, 0]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [212.8214263916016, 0, 315.9291052858589, 0, 0, 261.3820495605469, 199.5440780217596, 0, 0, 0, 1, 0]

@@ -1,0 +1,15 @@
+baseline: 0.1
+<<<<<<< HEAD
+gain: 1.0
+k: 27.0
+limit: 1.0
+radius: 0.0318
+trim: 0.088
+=======
+calibration_time: 2016-04-22-20-07-15
+gain: 1.2000000476837158
+k: 27.0
+limit: 1.0
+radius: 0.0318
+trim: 0.10000000149011612
+>>>>>>> dp45

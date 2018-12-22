@@ -1,0 +1,33 @@
+<launch>
+	<arg name="veh" doc="Name of vehicle. ex: megaman"/>
+	<arg name="local" default="false" doc="true for running everything you possibly can on laptop. false for everything running on vehicle."/>
+	<arg name="config" default="baseline" doc="Specify a config."/>
+	<arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+	<arg name="live" default="true" doc="if set to true, run the camera and do live detection. "/>
+ 	<arg name="camera_topic" default="camera_node"/>
+  	<!-- <arg name="rectify" default="false" doc="If set to true, rectify image before process."/> -->
+	<arg name="view_markers" default="true" doc="should we output markers for rviz?"/>
+	<arg name="only" default="false" doc="Only run the ground_projection part when set to true."/>
+
+	<include unless="$(arg only)" file="$(find duckietown)/launch/line_detector.launch">
+		 <arg name="veh" value="$(arg veh)"/>
+		 <arg name="local" value="$(arg local)"/>
+		 <arg name="config" value="$(arg config)"/>
+		 <arg name="param_file_name" value="$(arg param_file_name)"/>
+		 <arg name="live" value="$(arg live)"/>
+	</include>
+
+	<include file="$(find ground_projection)/launch/ground_projection.launch">
+		 <arg name="veh" value="$(arg veh)"/>
+		 <arg name="local" value="$(arg local)"/>
+		 <arg name="config" value="$(arg config)"/>
+		 <arg name="param_file_name" value="$(arg param_file_name)"/>
+		 <arg name="camera_topic" value="$(arg camera_topic)"/>
+	</include>
+
+	<!-- Duckiebot visualizer (always local) -->
+	<node  ns="$(arg veh)" if="$(arg view_markers)" name="duckiebot_visualizer" pkg="duckiebot_visualizer" type="duckiebot_visualizer.py" output="screen">
+	      <param name="~veh_name" value="$(arg veh)"/>
+	      <remap from="~segment_list" to="ground_projection/lineseglist_out"/>
+	</node>
+</launch>

@@ -1,0 +1,9 @@
+  # default parameters for forward_kinematics_node and inverse_kinematics_node
+  fi_theta_dot_function_param: Duty_fi_linear_no_constant
+  fi_v_function_param: Duty_fi_linear_no_constant
+  theta_dot_weights_param: [-1, 1]
+  v_weights_param: [1, 1]
+  learner_duty_threshold: 0.2
+  learner_number_of_zero_entries: 10
+  learner_number_of_v_samples: 50
+  learner_number_of_theta_dot_samples_per_direction: 50

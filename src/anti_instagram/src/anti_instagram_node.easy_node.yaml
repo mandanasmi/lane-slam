@@ -1,0 +1,44 @@
+description:
+    
+parameters:
+    publish_corrected_image:
+        desc: |
+            Whether to compute and publish the corrected image.
+        type: bool
+        default: false
+
+
+subscriptions:
+    image:
+        desc: |
+            This is the compressed image to read.
+        topic: ~uncorrected_image
+        type: sensor_msgs/CompressedImage
+    click:
+        desc: Activate the calibration phase with this switch.
+        topic: ~click
+        type: duckietown_msgs/BoolStamped
+        queue_size: 1
+
+
+
+publishers:
+    image:
+        desc: The corrected image.
+        type: sensor_msgs/Image
+        queue_size: 1
+        topic: ~corrected_image
+    health:
+        desc: The health of the process.
+        type: duckietown_msgs/AntiInstagramHealth
+        latch: true
+        queue_size: 1
+        topic: ~colorSegment
+    transform:
+        desc: The computed transform.
+        type: duckietown_msgs/AntiInstagramTransform
+        queue_size: 1
+        topic: ~transform
+        latch: true
+
+contracts: {}

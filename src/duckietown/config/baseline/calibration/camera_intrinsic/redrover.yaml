@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [323.6396218979426, 0.0, 290.3740033758671, 0.0, 329.040529127523, 242.06801873520013,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: redrover/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2586163870859045, 0.0436387338495118, 0.003238641418117761, 0.0034000798867961555,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [220.29847717285156, 0.0, 295.3084535375565, 0.0, 0.0, 269.77630615234375,
+    246.58282120952208, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

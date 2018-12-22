@@ -1,0 +1,26 @@
+# default parameters for lane_filter/lane_filter_node
+
+#propagation
+use_propagation: True
+
+filter:
+  - lane_filter.LaneFilterHistogram
+  - configuration:
+      mean_d_0: 0
+      mean_phi_0: 0
+      sigma_d_0: 0.1
+      sigma_phi_0: 0.1
+      delta_d: 0.02
+      delta_phi: 0.1
+      d_max: 0.3
+      d_min: -0.15
+      phi_min: -1.5
+      phi_max: 1.5
+      cov_v: 0.5
+      linewidth_white: 0.05
+      linewidth_yellow: 0.025
+      lanewidth: 0.23
+      min_max: 0.1
+      sigma_d_mask: 1.0
+      sigma_phi_mask: 2.0
+

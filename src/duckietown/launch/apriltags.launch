@@ -1,0 +1,39 @@
+<launch>
+ 	<arg name="veh"/>
+ 	<arg name="local" default="false" doc="true for running everything you possibly can on laptop. false for everything running on vehicle."/>
+ 	<arg name="config" default="baseline" doc="Specify a config."/>
+	<arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+ 	<arg name="camera" default="true" doc="camera set to false means only apriltags no camera nodes are launched"/>
+    <arg name="live" default="true" doc="live set to false means we don't run the actual camera (i.e. running from a log file" />
+
+    <!-- Camera -->
+ 	<include if="$(arg camera)" file="$(find duckietown)/launch/camera.launch">
+ 		<arg name="veh" value="$(arg veh)"/>
+ 		<arg name="local" value="$(arg local)"/>
+ 		<arg name="config" value="$(arg config)"/>
+ 		<arg name="param_file_name" value="$(arg param_file_name)"/>
+ 		<arg name="raw" value="true"/>
+ 		<arg name="cam_info" value="true"/> 
+ 		<arg name="live" value="$(arg live)"/>
+		<arg name="rect" value="true" />
+ 	</include>
+ 
+ 	<!-- AprilTags Detections -->
+    <remap from="image_rect" to="camera_node/image/rect" />
+    <remap from="camera_node/image/camera_info" to="camera_node/raw_camera_info" />
+    <include file="$(find apriltags_ros)/launch/apriltag_detector_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+        <arg name="param_file_name" value="$(arg param_file_name)"/>
+    </include>
+ 
+ 	<!-- Postprocessing node -->
+ 	<remap from="apriltags_postprocessing_node/apriltags_in" to="tag_detections" />
+ 	<include file="$(find apriltags_ros)/launch/apriltags_postprocessing_node.launch">
+ 		<arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+        <arg name="param_file_name" value="$(arg param_file_name)"/>
+ 	</include>
+</launch>

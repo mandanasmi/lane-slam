@@ -1,0 +1,102 @@
+<launch>
+	<arg name="veh" doc="Name of vehicle. ex: megaman"/>
+	<arg name="local" default="false" doc="true for running everything you possibly can on laptop. false for everything running on vehicle."/>
+	<arg name="config" default="baseline" doc="Specify a config."/>
+	<arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+	<arg name="live" default="true" doc="if set to true, run the camera and do live detection. "/>
+	<arg name="only" default="false" doc="Only run the ground_projection part when set to true."/>
+
+	<remap from="static_object_detector_node/image_compressed" to="camera_node/image/compressed"/>
+	<include file="$(find mdoap)/launch/static_object_detector_node.launch">
+	    <arg name="veh" value="$(arg veh)"/>
+	    <arg name="local" value="$(arg local)"/>
+	    <arg name="config" value="$(arg config)"/>
+	    <arg name="param_file_name" value="$(arg param_file_name)"/>
+	</include>
+
+    <remap from="obstacle_safety_node/detection_list" to="static_object_detector_node/detection_list"/>
+	<include file="$(find mdoap)/launch/obstacle_safety_node.launch">
+	    <arg name="veh" value="$(arg veh)"/>
+	    <arg name="local" value="$(arg local)"/>
+	    <arg name="config" value="$(arg config)"/>
+	    <arg name="param_file_name" value="$(arg param_file_name)"/>
+	</include>
+
+
+  <!-- Ground projection -->
+  <include unless="$(arg only)" file="$(find duckietown)/launch/ground_projection.launch">
+      <arg name="veh" value="$(arg veh)"/>
+      <arg name="local" value="$(arg local)"/>
+      <arg name="config" value="$(arg config)"/>
+      <arg name="param_file_name" value="$(arg param_file_name)"/>
+      <arg name="live" value="$(arg live)"/>
+  </include>
+
+  <!-- Lane Filter -->
+  <remap from="lane_filter_node/segment_list" to="ground_projection/lineseglist_out"/>
+  <include file="$(find lane_filter)/launch/lane_filter_node.launch">
+      <arg name="veh" value="$(arg veh)"/>
+      <arg name="local" value="$(arg local)"/>
+      <arg name="config" value="$(arg config)"/>
+      <arg name="param_file_name" value="$(arg param_file_name)"/>
+  </include>
+
+    <!-- Lane controller -->
+    <remap from="lane_controller_node/lane_pose" to="lane_filter_node/lane_pose"/>
+    <include file="$(find lane_control)/launch/lane_controller_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+        <arg name="param_file_name" value="$(arg param_file_name)"/>        
+    </include>
+
+
+    <!-- Wheels Cmd Switch -->
+    <remap from="wheels_cmd_switch_node/mode" to="fsm_node/mode"/>
+    <remap from="wheels_cmd_switch_node/wheels_cmd_lane" to="lane_controller_node/wheels_control" />
+    <remap from="wheels_cmd_switch_node/simple_stop_commands" to="mdoap_controller_node/control" />
+    <remap from="wheels_cmd_switch_node/wheels_cmd_intersection" to="open_loop_intersection_control_node/wheels_cmd" />
+    <include file="$(find dagu_car)/launch/wheels_cmd_switch_node.launch">
+      <arg name="veh" value="$(arg veh)"/>        
+      <arg name="local" value="$(arg local)"/>        
+    </include>
+
+    <!-- Wheels Trimmer -->
+    <remap from="wheels_trimmer_node/wheels_cmd" to="wheels_cmd_switch_node/wheels_cmd"/>
+    <include file="$(find dagu_car)/launch/wheels_trimmer_node.launch">
+      <arg name="veh" value="$(arg veh)"/>
+      <arg name="local" value="$(arg local)"/>
+      <arg name="config" value="$(arg config)"/>
+      <arg name="param_file_name" value="$(arg param_file_name)"/>
+    </include>
+
+    <!-- Wheel Driver -->
+    <remap from="wheels_driver_node/wheels_cmd" to="wheels_trimmer_node/trimmed_wheels_cmd"/>    
+    <include  file="$(find dagu_car)/launch/wheels_driver_node.launch">
+      <arg name="veh" value="$(arg veh)"/>
+    </include>
+    
+    <!-- FSM -->
+    <remap from="fsm_node/lane_pose" to="lane_filter_node/lane_pose"/>
+    <remap from="fsm_node/stop_line_reading" to="stop_line_filter_node/stop_line_reading"/>
+    <remap from="fsm_node/clearance_to_go" to="veh_coordinator_node/clearance_to_go"/>
+    <remap from="fsm_node/intersection_done" to="open_loop_intersection_control_node/intersection_done"/>
+    <remap from="fsm_node/object_too_close" to="obstacle_safety_node/object_too_close"/>
+    <include file="$(find fsm)/launch/fsm_node.launch">
+      <arg name="veh" value="$(arg veh)"/>        
+      <arg name="local" value="$(arg local)"/>        
+      <arg name="config" value="$(arg config)"/>        
+      <arg name="param_file_name" value="$(arg param_file_name)"/>        
+    </include>
+
+  <remap from="mdoap_controller_node/too_close" to="obstacle_safety_node/object_too_close"/>
+  <remap from="mdoap_controller_node/detection_list_proj" to="obstacle_safety_node/detection_list_proj"/>
+  <remap from="mdoap_controller_node/lane_control" to="lane_controller_node/wheels_control"/>
+	<include file="$(find mdoap)/launch/mdoap_controller_node.launch">
+	    <arg name="veh" value="$(arg veh)"/>
+	    <arg name="local" value="$(arg local)"/>
+	    <arg name="config" value="$(arg config)"/>
+	    <arg name="param_file_name" value="$(arg param_file_name)"/>
+	</include>
+
+</launch>

@@ -1,0 +1,4 @@
+#visual_odometry/odometry_training_pairs_node
+stop_line_max_age: 1.0 # [sec] don't use stop_line_reading msg pairs more than this far apart
+lane_pose_max_age: 1.0 # [sec] don't use lane_pose msg pairs more than this far apart
+wheels_cmd_max_age: 2.0 # [sec] throw away wheels_cmd's older than this

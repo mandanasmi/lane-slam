@@ -1,0 +1,34 @@
+<launch>
+	<arg name="veh"/>
+	<arg name="config" default="baseline"/>
+        <arg name="pkg_name" default="apriltags"/>
+        <arg name="node_name" default="apriltags_preprocessing_node"/>
+    	<arg name="local" default="false" doc="true for running everything you possibly can on laptop. false for everything running on vehicle."/>
+	<arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman"/>
+	<arg name="loc" default="-1" doc="Physical room location of the duckietown map. E.g. 226 or 316"/>
+
+	<group ns="$(arg veh)">
+                <remap from="apriltags_global_node/camera_info" to="camera_node/camera_info"/>
+                <remap from="apriltags_fast_node/camera_info" to="camera_node/camera_info"/>
+                <remap from="apriltags_global_node/image_raw" to="apriltags_preprocessing_node/global_image_raw"/>
+ 				<remap from="apriltags_fast_node/image_raw" to="apriltags_preprocessing_node/fast_image_raw"/>
+        <node pkg="apriltags" type="april_tag_detector" name="apriltags_fast_node" output="screen">
+		</node>
+		<node pkg="apriltags" type="april_tag_detector" name="apriltags_global_node" output="screen">
+		</node>
+                <node pkg="apriltags" type="AprilPrePros.py" name="apriltags_preprocessing_node" output="screen">
+                <rosparam command="load" file="$(find duckietown)/config/$(arg config)/$(arg pkg_name)/$(arg node_name)/$(arg param_file_name).yaml"/>
+		</node>
+		<remap from="apriltags_postprocessing_global_node/apriltags_in" to="apriltags_global_node/apriltags" /> 
+	        <remap from="apriltags_postprocessing_global_node/apriltags_out" to="apriltags_global/detections" />
+		<node pkg="apriltags" type="AprilPostPros.py" name="apriltags_postprocessing_global_node" output="screen">
+		<param name="~loc" value="$(arg loc)" />
+		</node>
+		<remap from="apriltags_postprocessing_fast_node/apriltags_in" to="apriltags_fast_node/apriltags" /> 
+		<remap from="apriltags_postprocessing_fast_node/apriltags_out" to="apriltags_fast_node/detections" />
+		<node pkg="apriltags" type="AprilPostPros.py" name="apriltags_postprocessing_fast_node" output="screen">
+		<param name="~loc" value="$(arg loc)" />
+		</node>
+	</group>
+
+</launch>

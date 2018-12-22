@@ -1,0 +1,4 @@
+tile_width: 0.595 # [m] the width of the Duckietown tiles
+tag_offset: 0.09 # [m] the longest of two distances from the center of the tag to the edge
+tag_curb: 0.035 # [m] the shortest of two distances from the center of the tag to the edge
+map_name: test_map # duckietown_description uses this file to create the tf map

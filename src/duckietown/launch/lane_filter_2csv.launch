@@ -1,0 +1,29 @@
+<launch>
+	<arg name="veh" doc="Name of vehicle. ex: megaman"/>
+	<arg name="local" default="true" doc="true for running everything you possibly can on laptop. false for everything running on vehicle."/>
+	<arg name="config" default="baseline" doc="Specify a config."/>
+	<arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+	<arg name="live" default="false" doc="if set to true, run the camera and do live detection. "/>
+	<arg name="only" default="false" doc="Only run the ground_projection part when set to true."/>
+
+	<arg name="bag_in"/>
+
+  	<!-- lane_filter -->
+    <include file="$(find duckietown)/launch/lane_filter.launch">
+		<arg name="veh" value="$(arg veh)"/>
+		<arg name="local" value="$(arg local)"/>
+		<arg name="config" value="$(arg config)"/>
+		<arg name="param_file_name" value="$(arg param_file_name)"/>
+		<arg name="live" value="$(arg live)"/>
+    </include>
+
+	<!-- lane_filter_2csv -->
+	<remap from="lane_filter_2csv_node/stop_line_reading" to="stop_line_filter_node/stop_line_reading"/>
+	<remap from="lane_filter_2csv_node/lane_pose" to="lane_filter_node/lane_pose"/>
+	<remap from="lane_filter_2csv_node/wheels_cmd" to="wheels_driver_node/wheels_cmd"/>
+	<include file="$(find visual_odometry)/launch/lane_filter_2csv_node.launch">
+	    <arg name="veh" value="$(arg veh)"/>
+		<arg name="bag_in" value="$(arg bag_in)"/>
+	</include>
+
+</launch>	

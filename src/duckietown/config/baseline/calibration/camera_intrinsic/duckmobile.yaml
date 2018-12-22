@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [308.19563411818757, 0.0, 344.1914290481888, 0.0, 305.74249959229263, 246.32999671087626,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: duckmobile/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.28889967472575706, 0.061396671030672575, 0.0024755886830461287, -0.0022272601279060716,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [215.7630157470703, 0.0, 340.76320864945956, 0.0, 0.0, 232.1385498046875,
+    254.5670208747033, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [397.1765685437951, 0.0, 316.25888289102244, 0.0, 403.5246487733685, 221.49503136657015,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: amadobot/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.36791889889529594, 0.08771239068724, 0.0009686913859654071, 0.0031008252290399083,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [243.150390625, 0.0, 322.43291933485307, 0.0, 0.0, 247.06698608398438, 220.44930335623212,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

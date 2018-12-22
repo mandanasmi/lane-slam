@@ -1,0 +1,9 @@
+<launch>
+    <!-- average_quacks_node -->
+    <include file="$(find rostest_example)/launch/average_quacks_node.launch" />
+
+    <!-- duckiecall_node -->
+    <remap from="duckiecall_node/number_of_quacks" to="average_quacks_node/number_of_quacks" />
+    <include file="$(find rostest_example)/launch/duckiecall_node.launch" />
+    
+</launch>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <name>duckieteam</name>
+  <version>1.0.0</version>
+  <description>
+Code for handling the DB of people and robots.
+  </description>
+
+  <license>GPLv3</license>
+
+  <author email="acensi@idsc.mavt.ethz.ch">Andrea Censi</author>
+  <maintainer email="acensi@idsc.mavt.ethz.ch">Andrea Censi</maintainer>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>rospy</build_depend>
+  <run_depend>rospy</run_depend>
+</package>

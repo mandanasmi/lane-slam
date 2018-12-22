@@ -1,0 +1,11 @@
+<launch>
+    <arg name="veh" default="ferrari"/>
+    <arg name="bagin" doc="the full path to the input bag"/>
+
+    <!-- run vicon learning -->
+    <include file="$(find duckietown)/launch/vicon_learning.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="bagin" value="$(arg bagin)"/>
+    </include>
+
+</launch>

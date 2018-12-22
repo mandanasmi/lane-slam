@@ -1,0 +1,27 @@
+<launch>
+    <arg name="veh" doc="Name of vehicle. ex: megaman"/>
+    <arg name="local" default="false" doc="true for running on laptop. false for running on vehicle."/>
+    <arg name="config" default="baseline" doc="Specify a config."/>
+    <arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman. Note that you will need a megaman.yaml in the config folder for every node you are launching. To test with only one megaman.yaml, the recommendation is to set this to default and then manually change the desired param file in the approprate rosparam tag below"/> 
+
+    <include file="$(find duckietown)/machines"/>
+    <!-- intersection control -->
+
+    <!-- <remap from="~wheels_cmd" to="wheels_driver_node/wheels_cmd"/> -->
+    <!-- <remap from="~mode" to="fsm_node/mode"/> -->
+    <include file="$(find intersection_control)/launch/open_loop_intersection_controller_node.launch">
+        <arg name="veh" value="$(arg veh)"/>        
+        <arg name="local" value="$(arg local)"/>        
+        <arg name="config" value="$(arg config)"/>        
+        <arg name="param_file_name" value="$(arg param_file_name)"/>        
+    </include>
+
+<!--     
+    <node ns="$(arg veh)" if="$(arg local)" pkg="intersection_control" type="open_loop_intersection_control_node.py" name="open_loop_intersection_control_node" output="screen">
+        <rosparam command="load" file="$(find duckietown)/config/$(arg config)/intersection_control/open_loop_intersection_node/$(arg param_file_name).yaml"/>
+    </node>
+    <node ns="$(arg veh)" unless="$(arg local)" machine="$(arg veh)" pkg="intersection_control" type="open_loop_intersection_node.py" name="open_loop_intersection_control_node" output="screen">
+        <rosparam command="load" file="$(find duckietown)/config/$(arg config)/intersection_control/open_loop_intersection_node/$(arg param_file_name).yaml"/>
+    </node>
+
+ --></launch>

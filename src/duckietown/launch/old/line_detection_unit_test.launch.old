@@ -1,0 +1,7 @@
+<launch>
+	<arg name="veh"/>
+	<arg name="bagin"/>
+	<arg name="bagout"/>
+	<include file="$(find duckietown)/machines"/>
+	<node machine="$(arg veh)" pkg="rosbag" type="play" name="rosbag_play" args="bagin"/>
+	<node machine="$(arg veh)" pkg="rosbag" type="record" name="rosbag_record" args="-e "/$(arg veh)/line_detector/*" -O $(arg bagout)"/>

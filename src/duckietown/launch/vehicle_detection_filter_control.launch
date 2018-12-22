@@ -1,0 +1,31 @@
+<launch>
+	<arg name="veh" doc="Name of vehicle" />
+	<arg name="local" default="false" />
+
+	<!-- Vehicle Detection Package -->
+	<remap from="vehicle_detection_node/image" to="camera_node/image/compressed" />
+	<remap from="vehicle_filter_node/camera_info" to="camera_node/camera_info" />
+	<remap from="vehicle_filter_node/corners" to="vehicle_detection_node/corners" />
+	<remap from="vehicle_avoidance_control_node/vehicle_pose" to="vehicle_filter_node/pose"/>
+
+	<!-- Vehicle Detection Node -->
+	<include file="$(find vehicle_detection)/launch/vehicle_detection_node.launch">
+		<arg name="veh" value="$(arg veh)"/>
+		<arg name="local" value="$(arg local)" />
+	</include>
+	
+	<!-- Vehicle Filter Node -->
+	<include file="$(find vehicle_detection)/launch/vehicle_filter.launch">
+		<arg name="veh" value="$(arg veh)"/>
+		<arg name="local" value="$(arg local)" />
+	</include>	
+
+	<!-- Vehicle Control Node -->
+	<include file="$(find vehicle_detection)/launch/vehicle_avoidance_control_node.launch" >
+		<arg name="veh" value="$(arg veh)"/>
+		<arg name="local" value="$(arg local)" />
+	</include>
+</launch>
+
+
+

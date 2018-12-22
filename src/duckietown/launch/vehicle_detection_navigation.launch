@@ -1,0 +1,19 @@
+<launch>
+
+	<arg name="veh" doc="Name of vehicle" />
+    <arg name="local" default="false" />
+
+    <remap from="fsm_node/vehicle_detected" to="vehicle_avoidance_control_node/flag" />
+    <remap from="wheels_cmd_switch_node/wheels_cmd_avoidance" to="vehicle_avoidance_control_node/wheels_cmd" />
+
+    <include file="$(find duckietown)/launch/vehicle_detection_filter_control.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)" />
+    </include>
+
+    <include file="$(find duckietown)/launch/navigation.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)" />
+    </include>
+
+</launch>
