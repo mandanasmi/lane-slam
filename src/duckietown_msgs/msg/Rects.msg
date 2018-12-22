@@ -1,0 +1,1 @@
+duckietown_msgs/Rect[] rects

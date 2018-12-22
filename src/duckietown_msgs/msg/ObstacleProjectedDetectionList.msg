@@ -1,0 +1,2 @@
+Header header
+duckietown_msgs/ObstacleProjectedDetection[] list

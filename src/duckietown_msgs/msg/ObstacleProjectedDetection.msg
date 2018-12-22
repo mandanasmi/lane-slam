@@ -1,0 +1,3 @@
+geometry_msgs/Point location
+duckietown_msgs/ObstacleType type
+float32 distance
