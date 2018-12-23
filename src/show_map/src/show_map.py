@@ -11,24 +11,20 @@ class ShowMapNode(object):
         self.pub_map = rospy.Publisher("~lane_map", MarkerArray, queue_size=1)
         self.seg_list = []
         self.marker_map = MarkerArray()
-        self.dx = 0.01
-        self.dy = 0.0
         self.x = 0.0
         self.y = 0.0
         self.num_marker = 0
 
     def storeSegments(self,in_segs):
-        self.x = self.x+self.dx
-        self.y = self.y+self.dy
         rec_seg_list = SegmentList()
         rec_seg_list.header = in_segs.header
         for in_seg in in_segs.segments:
             new_seg = Segment()
-            new_seg.points[0].x = in_seg.points[0].x + self.x
-            new_seg.points[0].y = in_seg.points[0].y + self.y
+            new_seg.points[0].x = in_seg.points[0].x
+            new_seg.points[0].y = in_seg.points[0].y
             new_seg.points[0].z = 0.0
-            new_seg.points[1].x = in_seg.points[1].x + self.x
-            new_seg.points[1].y = in_seg.points[1].y + self.y
+            new_seg.points[1].x = in_seg.points[1].x
+            new_seg.points[1].y = in_seg.points[1].y
             new_seg.points[1].z = 0.0
             new_seg.color = in_seg.color
             rec_seg_list.segments.append(new_seg)
@@ -41,7 +37,8 @@ class ShowMapNode(object):
         for seg in segments.segments:
             self.num_marker = self.num_marker+1
             marker = Marker()
-            marker.header.frame_id = '/map'
+            marker.header.frame_id = '/duck'
+            marker.header.stamp=rospy.Time.now()
             marker.id = self.num_marker
             marker.type = marker.LINE_LIST
             marker.action = marker.ADD
