@@ -13,7 +13,7 @@
     <node if="$(arg local)"  pkg="ground_projection" type="ground_projection_node.py" name="ground_projection" output="screen" clear_params="true" required="true">
       <param name="~config" value="$(arg config)"/>
       <param name="~config_file_name" value="$(arg veh)"/>
-      <remap from="~lineseglist_in" to="line_detector_node/segment_list"/>
+      <remap from="~lineseglist_in" to="line_detector_node/segment_list_lsd"/>
       <remap from="~cali_image" to="$(arg camera_topic)/image/raw"/>
       <remap from="~camera_info" to="$(arg camera_topic)/camera_info"/>
     </node>

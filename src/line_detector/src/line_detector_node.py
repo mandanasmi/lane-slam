@@ -52,7 +52,7 @@ class LineDetectorNode(object):
         # Publishers
         # self.pub_lines = rospy.Publisher("~segment_list", SegmentList, queue_size=1)
         # self.pub_image = rospy.Publisher("~image_with_lines", Image, queue_size=1)
-        self.pub_lines = rospy.Publisher("~segment_list", SegmentList, queue_size=1)
+        self.pub_lines = rospy.Publisher("~segment_list_lsd", SegmentList, queue_size=1)
         self.pub_image = rospy.Publisher("~image_with_lines", Image, queue_size=1)
        
         # Subscribers

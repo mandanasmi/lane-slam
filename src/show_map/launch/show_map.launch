@@ -6,6 +6,14 @@
   <arg name="camera_topic" default="camera_node"/>
   <!-- <arg name="rectify" default="false" doc="If set to true, rectify image before process."/> -->
 
+  <!-- run lsd line detection -->
+  <include file="$(find line_detector)/launch/line_detector_node.launch">
+    <arg name="config" value="$(arg config)"/>
+    <arg name="veh" value="$(arg veh)"/>
+    <arg name="local" value="$(arg local)"/>
+    <arg name="param_file_name" value="$(arg param_file_name)"/>
+  </include>
+
   <!-- run ground projection -->
   <include file="$(find ground_projection)/launch/ground_projection.launch">
     <arg name="config" value="$(arg config)"/>
