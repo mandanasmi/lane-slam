@@ -1,19 +1,29 @@
 #!/usr/bin/env python
 
 import rospy
-from std_msgs.msg import String
 from duckietown_msgs.msg import SegmentList, Segment
+from std_msgs.msg import String
+import threading
 from visualization_msgs.msg import Marker, MarkerArray
+
+
 
 class ShowMapNode(object):
     def __init__(self):
-        self.sub_seg=rospy.Subscriber('~lineseglist_in',SegmentList, self.storeSegments, queue_size=1)
+        self.sub_seg=rospy.Subscriber('~lineseglist_in',SegmentList, self.cbLineSegList, queue_size=1)
         self.pub_map = rospy.Publisher("~lane_map", MarkerArray, queue_size=1)
         self.seg_list = []
         self.marker_map = MarkerArray()
         self.x = 0.0
         self.y = 0.0
         self.num_marker = 0
+
+    def cbLineSegList(self, lineseglist):
+        # Start a daemon thread to process the line segment list
+        thread = threading.Thread(target = self.storeSegments, args=(lineseglist,))
+        thread.setDaemon(True)
+        thread.start()
+        # Returns right away
 
     def storeSegments(self,in_segs):
         rec_seg_list = SegmentList()
