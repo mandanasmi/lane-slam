@@ -61,9 +61,9 @@ class LineDetectorLSD(Configurable, LineDetectorInterface):
         edges = cv2.Canny(gray, self.canny_thresholds[0], self.canny_thresholds[1], apertureSize = 3)
         return edges
 
-    def _LSDLine(self, gray):
+    def _LSDLine(self, edge):
         lsd = cv2.createLineSegmentDetector(_refine = cv2.LSD_REFINE_ADV)
-        lines, width, prec, _ = lsd.detect(gray)
+        lines, width, prec, _ = lsd.detect(edge)
         if lines is not None:
             lines = np.array(lines[:,0])
         else:
@@ -125,7 +125,7 @@ class LineDetectorLSD(Configurable, LineDetectorInterface):
 
     def detectLines(self, color):
         bw, edge_color = self._colorFilter(color)
-        lines = self._LSDLine(self.gray)
+        lines = self._LSDLine(edge_color)
         centers, normals = self._findNormal(bw, lines)
         return Detections(lines=lines, normals=normals, area=bw, centers=centers)
 
