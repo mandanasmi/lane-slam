@@ -1,0 +1,12 @@
+<launch>
+	<arg name="veh" default="pontiac" doc="Name of vehicle. ex: megaman"/>
+	<group ns="$(arg veh)">
+		<node name="lane_filter_tester" pkg="lane_filter" type="lane_filter_tester_node.py" output="screen">
+		      <param name="~x1" value="0"/>
+		      <param name="~y1" value="-0.1"/>
+	      	      <param name="~x2" value="0.2"/>
+	      	      <param name="~y2" value="0"/>
+	      	      <param name="~color" value="white"/>
+		 </node>
+	</group>
+</launch>

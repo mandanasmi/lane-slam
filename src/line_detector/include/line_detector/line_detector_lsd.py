@@ -127,7 +127,9 @@ class LineDetectorLSD(Configurable, LineDetectorInterface):
     def detectLines(self, color):
         bw, edge_color = self._colorFilter(color)
         lines = self._LSDLine(edge_color)
+        # print('LSD:', lines)
         centers, normals = self._findNormal(bw, lines)
+        # print('LSD:', centers, normals)
         return Detections(lines=lines, normals=normals, area=bw, centers=centers)
 
     def setImage(self, bgr):

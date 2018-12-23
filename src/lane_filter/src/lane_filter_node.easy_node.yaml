@@ -1,0 +1,181 @@
+description:
+
+
+subscriptions:
+    velocity:
+        topic: ~velocity
+        type: duckietown_msgs/Twist2DStamped
+        desc:
+    segment_list:
+        topic: ~segment_list
+        type: duckietown_msgs/SegmentList
+        desc:
+        queue_size: 1
+
+publishers:
+    lane_pose:
+        topic: ~lane_pose
+        type: duckietown_msgs/LanePose
+        desc:
+        queue_size: 1
+    belief_img:
+        topic: ~belief_img
+        type: sensor_msgs/Image
+        desc:
+        queue_size: 1
+    entropy:
+        topic: ~entropy
+        type: std_msgs/Float32
+        desc:
+        queue_size: 1
+    in_lane:
+        topic: ~in_lane
+        type: duckietown_msgs/BoolStamped
+        desc:
+        queue_size: 1
+    switch:
+        topic: ~switch
+        type: duckietown_msgs/BoolStamped
+        desc:
+        queue_size: 1
+
+contracts: {}
+
+
+parameters:
+    mean_d_0:
+        type: float
+        default: 0
+        desc:
+    mean_phi_0:
+        type: float
+        default: 0
+        desc:
+    sigma_d_0:
+        type: float
+        default: 0
+        desc:
+    sigma_phi_0:
+        type: float
+        default: 0
+        desc:
+    delta_d:
+        type: float
+        default: 0.02
+        desc: (meters)
+    delta_phi:
+        type: float
+        default: 0
+        desc: (radians)
+    d_max:
+        type: float
+        default: 0.5
+        desc:
+    d_min:
+        type: float
+        default: -0.7
+        desc:
+    phi_min:
+        type: float
+        default: -1.5707 # -pi/2
+        desc:
+    phi_max:
+        type: float
+        default: +1.5707 # +pi/2
+        desc:
+    cov_v:
+        type: float
+        default: 0.5
+        desc: |
+            Linear velocity "input".
+
+            XXX which units?
+
+    cov_omega:
+        type: float
+        default: 0.01
+        desc: |
+            Angular velocity "input".
+
+            XXX which units?
+
+    linewidth_white:
+       type: float
+       default: 0.04
+       desc:
+
+    linewidth_yellow:
+        type: float
+        default: 0.02
+        desc:
+
+    lanewidth:
+        type: float
+        default: 0.4
+        desc:
+
+    min_max:
+        type: float
+        default: 0.3
+        desc: Expressed in nats.
+
+    use_distance_weighting:
+       type: bool
+       default: False
+       desc: For use of distance weighting (dw) function.
+
+    zero_val:
+        type: float
+        default: 1
+        desc:
+
+    l_peak:
+        type: float
+        default: 1
+        desc:
+
+    peak_val:
+        type: float
+        default: 10
+        desc:
+
+    l_max:
+        type: float
+        default: 2
+        desc:
+
+    use_max_segment_dist:
+        type: bool
+        default: False
+        desc: For use of maximum segment distance.
+
+    max_segment_dist:
+        type: float
+        default: 1.0
+        desc: For use of maximum segment distance.
+
+
+    use_min_segs:
+        type: bool
+        default: False
+        desc: For use of minimum segment count.
+
+    min_segs:
+       type: int
+       default: 10
+       desc: For use of minimum segment count.
+
+    use_propagation:
+        type: bool
+        default: False
+        desc: For propagation.
+
+    sigma_d_mask:
+       type: float
+       default: 0.05
+       desc:
+
+    sigma_phi_mask:
+       type: float
+       default: 0.05
+       desc:
