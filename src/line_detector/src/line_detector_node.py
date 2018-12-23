@@ -22,10 +22,10 @@ class LineDetectorNode(object):
     def __init__(self):
         self.node_name = "LineDetectorNode"
 
-        # Thread lock 
+        # Thread lock
         self.thread_lock = threading.Lock()
-       
-        # Constructor of line detector 
+
+        # Constructor of line detector
         self.bridge = CvBridge()
 
         self.active = True
@@ -46,7 +46,7 @@ class LineDetectorNode(object):
         self.detector = None
         self.verbose = None
         self.updateParams(None)
-        
+
         self.vehicle = rospy.get_param('~vehicle')
 
         # Publishers
@@ -54,7 +54,7 @@ class LineDetectorNode(object):
         # self.pub_image = rospy.Publisher("~image_with_lines", Image, queue_size=1)
         self.pub_lines = rospy.Publisher("~segment_list_lsd", SegmentList, queue_size=1)
         self.pub_image = rospy.Publisher("~image_with_lines", Image, queue_size=1)
-       
+
         # Subscribers
         # self.sub_image = rospy.Subscriber("~image", CompressedImage, self.cbImage, queue_size=1)
         # self.sub_transform = rospy.Subscriber("~transform", AntiInstagramTransform, self.cbTransform, queue_size=1)
@@ -83,7 +83,7 @@ class LineDetectorNode(object):
         if self.detector is None:
             c = rospy.get_param('~detector')
             assert isinstance(c, list) and len(c) == 2, c
-        
+
 #         if str(self.detector_config) != str(c):
             self.loginfo('new detector config: %s' % str(c))
 
@@ -102,7 +102,7 @@ class LineDetectorNode(object):
         self.stats.received()
 
         if not self.active:
-            return 
+            return
         # Start a daemon thread to process the image
         thread = threading.Thread(target=self.processImage,args=(image_msg,))
         thread.setDaemon(True)
@@ -120,7 +120,7 @@ class LineDetectorNode(object):
 
     def intermittent_log_now(self):
         return self.intermittent_counter % self.intermittent_interval == 1
-    
+
     def intermittent_log(self, s):
         if not self.intermittent_log_now():
             return
@@ -147,7 +147,7 @@ class LineDetectorNode(object):
             self.stats.reset()
 
         tk = TimeKeeper(image_msg)
-        
+
         self.intermittent_counter += 1
 
         # Decode from compressed image with OpenCV
@@ -186,11 +186,11 @@ class LineDetectorNode(object):
         red = self.detector.detectLines('red')
 
         tk.completed('detected')
-     
+
         # SegmentList constructor
         segmentList = SegmentList()
         segmentList.header.stamp = image_msg.header.stamp
-        
+
         # Convert to normalized pixel coordinates, and add segments to segmentList
         arr_cutoff = np.array((0, self.top_cutoff, 0, self.top_cutoff))
         arr_ratio = np.array((1./self.image_size[1], 1./self.image_size[0], 1./self.image_size[1], 1./self.image_size[0]))
@@ -203,10 +203,10 @@ class LineDetectorNode(object):
         if len(red.lines) > 0:
             lines_normalized_red = ((red.lines + arr_cutoff) * arr_ratio)
             segmentList.segments.extend(self.toSegmentMsg(lines_normalized_red, red.normals, Segment.RED))
-        
+
         self.intermittent_log('# segments: white %3d yellow %3d red %3d' % (len(white.lines),
                 len(yellow.lines), len(red.lines)))
-        
+
         tk.completed('prepared')
 
         # Publish segmentList
@@ -214,32 +214,32 @@ class LineDetectorNode(object):
         tk.completed('--pub_lines--')
 
         # VISUALIZATION only below
-        
-        if self.verbose:
 
-            # Draw lines and normals
-            image_with_lines = np.copy(image_cv_corr)
-            drawLines(image_with_lines, white.lines, (0, 0, 0))
-            drawLines(image_with_lines, yellow.lines, (255, 0, 0))
-            drawLines(image_with_lines, red.lines, (0, 255, 0))
+        #if self.verbose:
 
-            tk.completed('drawn')
+        # Draw lines and normals
+        image_with_lines = np.copy(image_cv_corr)
+        drawLines(image_with_lines, white.lines, (0, 0, 0))
+        drawLines(image_with_lines, yellow.lines, (255, 0, 0))
+        drawLines(image_with_lines, red.lines, (0, 255, 0))
+
+        tk.completed('drawn')
 
             # Publish the frame with lines
-            image_msg_out = self.bridge.cv2_to_imgmsg(image_with_lines, "bgr8")
-            image_msg_out.header.stamp = image_msg.header.stamp
-            self.pub_image.publish(image_msg_out)
+        image_msg_out = self.bridge.cv2_to_imgmsg(image_with_lines, "bgr8")
+        image_msg_out.header.stamp = image_msg.header.stamp
+        self.pub_image.publish(image_msg_out)
 
-            tk.completed('pub_image')
+        tk.completed('pub_image')
 
 #         if self.verbose:
-            colorSegment = color_segment(white.area, red.area, yellow.area) 
-            edge_msg_out = self.bridge.cv2_to_imgmsg(self.detector.edges, "mono8")
-            colorSegment_msg_out = self.bridge.cv2_to_imgmsg(colorSegment, "bgr8")
-            self.pub_edge.publish(edge_msg_out)
-            self.pub_colorSegment.publish(colorSegment_msg_out)
+        #colorSegment = color_segment(white.area, red.area, yellow.area)
+        #edge_msg_out = self.bridge.cv2_to_imgmsg(self.detector.edges, "mono8")
+        #colorSegment_msg_out = self.bridge.cv2_to_imgmsg(colorSegment, "bgr8")
+        #self.pub_edge.publish(edge_msg_out)
+        #self.pub_colorSegment.publish(colorSegment_msg_out)
 
-            tk.completed('pub_edge/pub_segment')
+        #tk.completed('pub_edge/pub_segment')
 
 
         self.intermittent_log(tk.getall())
@@ -247,9 +247,9 @@ class LineDetectorNode(object):
 
     def onShutdown(self):
         self.loginfo("Shutdown.")
-            
+
     def toSegmentMsg(self,  lines, normals, color):
-        
+
         segmentMsgList = []
         for x1,y1,x2,y2,norm_x,norm_y in np.hstack((lines,normals)):
             segment = Segment()
@@ -260,7 +260,7 @@ class LineDetectorNode(object):
             segment.pixels_normalized[1].y = y2
             segment.normal.x = norm_x
             segment.normal.y = norm_y
-             
+
             segmentMsgList.append(segment)
         return segmentMsgList
 
@@ -311,11 +311,8 @@ class Stats():
 
 
 
-if __name__ == '__main__': 
+if __name__ == '__main__':
     rospy.init_node('line_detector',anonymous=False)
     line_detector_node = LineDetectorNode()
     rospy.on_shutdown(line_detector_node.onShutdown)
     rospy.spin()
-
-
-
