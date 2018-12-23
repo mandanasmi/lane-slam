@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [341.7466206783907, 0.0, 312.70602263553644, 0.0, 338.38048823401624, 242.72169415033443,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: scbb/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2756110891082357, 0.051993917771917385, 0.0026600872800703473, 0.000886421584837247,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [227.60813903808594, 0.0, 313.4457595056392, 0.0, 0.0, 278.8682861328125,
+    247.22943501237023, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

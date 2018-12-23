@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [340.14244728460204, 0.0, 321.0296797899084, 0.0, 341.6360145795056, 228.2895063104939,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: student10/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.30663025185923287, 0.07249104089277018, 0.0004286025590341287, -0.0006969694341691484,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [241.91989135742188, 0.0, 320.0557081659972, 0.0, 0.0, 276.5299987792969,
+    222.22180174840105, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

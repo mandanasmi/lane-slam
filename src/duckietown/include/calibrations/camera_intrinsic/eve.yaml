@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [334.4935741576431, 0.0, 327.81770386645593, 0.0, 337.20308430335035, 194.20749428040452,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: eve/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.24874001934192572, 0.04243936131327153, 0.004377751039563428, -0.0012397353216598201,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [227.98646545410156, 0.0, 327.34847429617, 0.0, 0.0, 277.8922424316406, 178.6298879962851,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

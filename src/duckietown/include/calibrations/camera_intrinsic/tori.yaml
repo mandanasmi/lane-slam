@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [332.68049673742615, 0.0, 316.3789126633995, 0.0, 332.54200587928034, 230.15287278212577,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: tori/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2893805193683299, 0.06300467024846944, 0.0006589907956965329, -0.0007195182490690304,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [234.32029724121094, 0.0, 315.880671860823, 0.0, 0.0, 269.1954345703125, 225.31468872757978,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

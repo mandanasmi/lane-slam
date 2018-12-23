@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [330.9129775551541, 0.0, 299.8922433716875, 0.0, 330.73284871204453, 217.31822731298004,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: vickie/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.3059258314298391, 0.07115793461777004, 0.0017087526061166853, 0.006219920511788427,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [234.59735107421875, 0.0, 308.1696960818008, 0.0, 0.0, 261.0079345703125,
+    205.76922643178114, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [326.06458233401526, 0.0, 306.6389632318726, 0.0, 330.99099736051943, 220.1238608814283,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: gummi/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.26926767060464707, 0.05494843197714348, 0.0036216641177382785, 0.0013551076116927977,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [230.00540161132812, 0.0, 310.62750159284406, 0.0, 0.0, 272.3533020019531,
+    214.11520157150335, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

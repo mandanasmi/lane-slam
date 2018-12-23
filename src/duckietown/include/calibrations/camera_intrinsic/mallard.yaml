@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [348.8461375869529, 0.0, 329.4429746650971, 0.0, 345.7830230259048, 211.4271002865802,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: mallard/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.29810924094638797, 0.06936159398006117, 0.0025049929017131748, -0.0008789871371483241,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [249.15809631347656, 0.0, 327.2969127812303, 0.0, 0.0, 281.850830078125, 199.86276101325348,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

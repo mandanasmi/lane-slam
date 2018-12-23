@@ -11,7 +11,7 @@ from duckietown_utils.path_utils import get_ros_package_path
 from duckietown_utils.yaml_wrap import (yaml_load_file, yaml_write_to_file)
 import os.path
 from duckietown_utils import (logger, get_duckiefleet_root)
-
+import sys
 class GroundProjection():
 
     def __init__(self, robot_name="neo"):
@@ -132,7 +132,7 @@ class GroundProjection():
 
         # Compute homography from image to ground
         self.H, mask = cv2.findHomography(corners2.reshape(len(corners2), 2), np.array(src_pts), cv2.RANSAC)
-        extrinsics_filename = get_duckiefleet_root() + "/calibrations/camera_extrinsic/" + self.robot_name + ".yaml"
+        extrinsics_filename = sys.path[0] + "/calibrations/camera_extrinsic/" + self.robot_name + ".yaml"
         self.write_homography(extrinsics_filename)
         logger.info("Wrote ground projection to {}".format(extrinsics_filename))
 
@@ -142,10 +142,10 @@ class GroundProjection():
 
     def load_homography(self):
         '''Load homography (extrinsic parameters)'''
-        filename = (get_duckiefleet_root() + "/calibrations/camera_extrinsic/" + self.robot_name + ".yaml")
+        filename = (sys.path[0] + "/calibrations/camera_extrinsic/" + self.robot_name + ".yaml")
         if not os.path.isfile(filename):
             logger.warn("no extrinsic calibration parameters for {}, trying default".format(self.robot_name))
-            filename = (get_duckiefleet_root() + "/calibrations/camera_extrinsic/default.yaml")
+            filename = (sys.path[0] + "/calibrations/camera_extrinsic/default.yaml")
             if not os.path.isfile(filename):
                 logger.error("can't find default either, something's wrong")
             else:
@@ -188,10 +188,10 @@ class GroundProjection():
 
     def load_camera_info(self):
         '''Load camera intrinsics'''
-        filename = (os.environ['DUCKIEFLEET_ROOT'] + "/calibrations/camera_intrinsic/" + self.robot_name + ".yaml")
+        filename = (sys.path[0] + "/calibrations/camera_intrinsic/" + self.robot_name + ".yaml")
         if not os.path.isfile(filename):
             logger.warn("no intrinsic calibration parameters for {}, trying default".format(self.robot_name))
-            filename = (os.environ['DUCKIEFLEET_ROOT'] + "/calibrations/camera_intrinsic/default.yaml")
+            filename = (sys.path[0] + "/calibrations/camera_intrinsic/default.yaml")
             if not os.path.isfile(filename):
                 logger.error("can't find default either, something's wrong")
         calib_data = yaml_load_file(filename)
@@ -232,3 +232,4 @@ class GroundProjection():
         # TODO: debug PinholeCameraModel()
         self.pcm_.rectifyImage(cv_image_raw, cv_image_rectified)
         return cv_image_rectified
+

@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [343.09332359467453, 0.0, 311.8011255209016, 0.0, 344.82376778246356, 223.8067561500115,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: mvptruck/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2904757157517696, 0.061943924804179394, 0.004040426342798761, 0.0005984830072890319,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [238.28819274902344, 0.0, 314.6872015880035, 0.0, 0.0, 284.22149658203125,
+    219.81799214210696, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

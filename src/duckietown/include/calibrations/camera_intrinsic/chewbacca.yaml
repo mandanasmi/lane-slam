@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [315.84294416888895, 0.0, 321.89058905547495, 0.0, 317.23684551813574, 235.78616992512292,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: chewbacca/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.28971351691457187, 0.06433794174677274, -0.0012031297781465887, -0.00027911493562491734,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [223.50384521484375, 0.0, 321.30931809580943, 0.0, 0.0, 249.4770965576172,
+    230.8980059541782, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

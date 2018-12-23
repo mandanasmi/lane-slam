@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [352.4795791292202, 0.0, 320.5832870726454, 0.0, 347.122879543225, 262.3731911669017,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: ola/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2915775541837731, 0.06227640516438537, -0.0038439198914728425, 0.0006610480515446374,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [243.86436462402344, 0.0, 321.33284154206194, 0.0, 0.0, 285.9261169433594,
+    269.63174209978206, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

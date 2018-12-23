@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [322.5930217122517, 0.0, 316.49770711848345, 0.0, 317.7034778725839, 233.94804873048477,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: fang/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.23963157607838137, 0.03932338334668091, 0.0007327000791642617, 0.0017102952703612394,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [214.47860717773438, 0.0, 319.6990739318426, 0.0, 0.0, 263.0505676269531,
+    231.62995267104088, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [361.58100437113353, 0.0, 317.9127184663754, 0.0, 355.90465554417597, 243.37300302681604,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: alfi/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.3188111249196134, 0.0785811590981324, -0.0006333276278398727, -0.001079399811630805,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [253.9603729248047, 0.0, 317.04893631623963, 0.0, 0.0, 292.23382568359375,
+    244.46747451854026, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [332.09944163913735, 0.0, 322.3493988196422, 0.0, 335.41249058785723, 241.26993426964665,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: zanthar/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.30205246626623306, 0.0780986890091533, 0.00030609995029127877, 0.001009237945974787,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [245.20574951171875, 0.0, 323.59209443233703, 0.0, 0.0, 272.82952880859375,
+    242.28408934885738, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

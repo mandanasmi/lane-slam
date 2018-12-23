@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [338.3403015095598, 0.0, 331.36699268615706, 0.0, 341.3535964267662, 243.95753006855878,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: arki/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2738112838215229, 0.055199513278358564, 0.00022689009073357586, 0.0002605051199667359,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [234.13223266601562, 0.0, 332.9357675778556, 0.0, 0.0, 284.2135314941406,
+    246.15481926808934, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

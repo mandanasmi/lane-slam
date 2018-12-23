@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [327.35561787252277, 0.0, 300.06581987491467, 0.0, 330.65141984694156, 251.6393762287911,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: justduckingaround/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2869438391093178, 0.06666754988282907, -0.00016104525663695473, 0.001249861796652411,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [236.0739288330078, 0.0, 302.95936754796094, 0.0, 0.0, 268.33892822265625,
+    257.649781358341, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [339.661744471486, 0.0, 304.21589337824184, 0.0, 335.8795123624501, 221.28760314067068,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: r2duck2/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.27137464550500123, 0.05216059459079659, 0.0006720762454715193, 3.124792339290133e-05,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [235.333740234375, 0.0, 302.68562240045867, 0.0, 0.0, 275.5390319824219, 212.2274911610548,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

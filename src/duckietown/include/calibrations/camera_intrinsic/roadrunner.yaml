@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [360.27016065093767, 0.0, 306.88848571854976, 0.0, 356.05377433896666, 215.89879911992608,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: roadrunner/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2738044891436547, 0.057455789354766036, -0.003659790832601496, -0.001640125871747548,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [257.5063781738281, 0.0, 293.5729536793806, 0.0, 0.0, 297.86395263671875,
+    202.2714318099097, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

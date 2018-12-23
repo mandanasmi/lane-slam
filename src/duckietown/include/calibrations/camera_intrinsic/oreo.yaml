@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [318.69610421277093, 0.0, 326.3981771671353, 0.0, 314.23583048106553, 239.6651260157668,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: oreo/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.27884906181402663, 0.053446650747607245, 0.00422681284749377, -0.000841317941450484,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [219.14605712890625, 0.0, 325.0672296245175, 0.0, 0.0, 245.88339233398438,
+    245.1749166805257, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

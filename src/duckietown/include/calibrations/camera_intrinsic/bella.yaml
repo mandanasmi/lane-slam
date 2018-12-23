@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [392.11972106587336, 0.0, 311.3646761569172, 0.0, 392.39168741531637, 318.7073972148718,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: bella/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.29115978369726897, 0.06375993684792831, -0.006137220439737563, -0.0005453778612891601,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [291.4326477050781, 0.0, 303.4178673152019, 0.0, 0.0, 324.0357360839844, 338.03385330600577,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

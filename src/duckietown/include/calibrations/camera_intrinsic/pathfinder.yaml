@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [335.23375340465697, 0.0, 314.6746781845721, 0.0, 331.94616682695636, 235.1039781622963,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: pathfinder/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.31484444513047416, 0.09120524151788749, 0.0017733307690154638, -0.0027006466452102083,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [254.19615173339844, 0.0, 310.4629432210604, 0.0, 0.0, 267.580810546875, 234.7561635302991,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [339.35683833937657, 0.0, 312.65759497241254, 0.0, 338.8879922839524, 245.57421330532466,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: ducktaped/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.29636723978387747, 0.06740394403251586, -0.0022928827486192608, 0.0006612111489185752,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [240.0874786376953, 0.0, 314.96252519204245, 0.0, 0.0, 276.298828125, 245.96723308728542,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

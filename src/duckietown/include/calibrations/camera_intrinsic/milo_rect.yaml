@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [322.5309588810072, 0.0, 326.1897388789192, 0.0, 326.42912866290214, 232.65743338616915,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: milo/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2674323347769451, 0.04628823880332453, 0.0025161911222271426, -0.001002067711759875,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [196.86669921875, 0.0, 322.8191174233798, 0.0, 0.0, 199.224609375, 236.86291050422005,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

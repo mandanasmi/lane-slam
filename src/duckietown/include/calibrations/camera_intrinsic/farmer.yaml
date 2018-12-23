@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [237.16153749291345, 0.0, 314.78748892885, 0.0, 234.07931499213942, 233.14770138526103,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: farmer/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.10833357479852536, 0.009160369940841467, 0.005765484130133645, -0.00044205688558221886,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [176.56907653808594, 0.0, 309.31742348828266, 0.0, 0.0, 202.86386108398438,
+    238.3465752754746, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

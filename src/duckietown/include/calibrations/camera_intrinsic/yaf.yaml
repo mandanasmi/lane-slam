@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [337.57243586243413, 0.0, 323.1954772621967, 0.0, 337.16413394306767, 225.95094133594554,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: yaf/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.3069098559412382, 0.08562005643704901, -0.00020581393125126689, -0.001054715579370404,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [254.6234588623047, 0.0, 321.88634921436824, 0.0, 0.0, 274.51971435546875,
+    218.9943540330023, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

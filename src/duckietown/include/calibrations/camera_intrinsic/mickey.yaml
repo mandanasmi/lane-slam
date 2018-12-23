@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [341.6779067471656, 0.0, 334.0777705486109, 0.0, 338.74425395168765, 241.03891853195856,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: mickey/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.3061634036984332, 0.07429504619812156, -0.0008560655860773187, -0.0005533016965389437,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [244.17674255371094, 0.0, 331.4990547818743, 0.0, 0.0, 274.0675354003906,
+    240.5988264639018, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

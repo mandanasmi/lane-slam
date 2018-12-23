@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [337.6135264983113, 0.0, 306.4029327492642, 0.0, 334.6502265908623, 219.05046826801708,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: maxhav/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.29464181329610784, 0.06900007527773917, 0.0035860933873657383, -0.00016125186496838333,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [242.7577362060547, 0.0, 306.08762042128, 0.0, 0.0, 271.1249694824219, 212.0336739027298,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

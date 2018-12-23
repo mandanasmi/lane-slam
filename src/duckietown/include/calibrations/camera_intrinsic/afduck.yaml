@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [346.4127659359219, 0.0, 325.18887945010226, 0.0, 341.56839031584246, 230.11973582161517,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: afduck/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2856223049365749, 0.05712880862412497, -0.0035703026168551807, 0.0016080957428710261,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [234.6392822265625, 0.0, 326.8452771718148, 0.0, 0.0, 279.0774230957031, 220.58140581075713,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

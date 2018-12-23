@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [304.74552199280834, 0.0, 310.13947055741346, 0.0, 306.04839275134395, 247.3667257991389,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: morty/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.261737215576948, 0.05074429796471955, -0.0009193761667525101, 0.0016757908297210784,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [213.2347412109375, 0.0, 311.34136284117994, 0.0, 0.0, 242.22103881835938,
+    250.2728319972157, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

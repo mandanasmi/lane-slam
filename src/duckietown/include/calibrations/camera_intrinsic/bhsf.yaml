@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [332.15917876696045, 0.0, 324.7085094399204, 0.0, 333.41763344787364, 224.2353494461823,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: bhsf/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.302030008657109, 0.07844088215420486, 0.001312658481147806, -0.0005326270794592966,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [245.67507934570312, 0.0, 324.43438841166426, 0.0, 0.0, 269.84515380859375,
+    217.66370475073563, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [342.09849010793897, 0.0, 307.4440918594641, 0.0, 341.7907962498704, 226.71900502138595,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: almightlybot/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.290627324719084, 0.0700087118749717, 0.0006748439665476862, 0.002580840330821159,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [248.3842010498047, 0.0, 312.98982178687766, 0.0, 0.0, 282.0295104980469,
+    221.032525630877, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

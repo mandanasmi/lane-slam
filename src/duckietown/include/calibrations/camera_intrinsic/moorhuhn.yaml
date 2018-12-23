@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [351.2630147511643, 0.0, 336.1903962635366, 0.0, 356.86999405183775, 252.48455602640968,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: moorhuhn/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2709386510331601, 0.04850757020607347, 0.004350645717110357, -0.00022424623260002422,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [236.913330078125, 0.0, 349.1255163033493, 0.0, 0.0, 300.5098876953125, 262.3286608536,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

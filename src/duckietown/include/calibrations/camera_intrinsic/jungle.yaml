@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [311.91379078756825, 0.0, 326.9271053303758, 0.0, 308.75415059264196, 222.291672470436,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: jungle/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2831290512570605, 0.0635082831335534, 0.0023822866408405065, 0.0002938009765079908,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [223.63780212402344, 0.0, 326.7945123013578, 0.0, 0.0, 241.49208068847656,
+    214.62532785758413, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

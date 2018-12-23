@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [360.84206593032474, 0.0, 314.8157959437128, 0.0, 357.29982517559705, 239.68952288404807,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: mrgoobers/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.3087685762138291, 0.07374547383955149, -0.00034562344645738943, 0.0021840730500333537,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [251.24671936035156, 0.0, 319.0452311961053, 0.0, 0.0, 296.438720703125, 239.17678057514422,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

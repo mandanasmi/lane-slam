@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [316.81593186202076, 0.0, 325.90195533470376, 0.0, 320.1690022069204, 234.7654555167928,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: forrest/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.27544970624009074, 0.05269326621907823, 0.0001096949315860532, 0.0014327108642010076,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [217.85531616210938, 0.0, 326.5008580327667, 0.0, 0.0, 255.14593505859375,
+    231.0271453710302, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

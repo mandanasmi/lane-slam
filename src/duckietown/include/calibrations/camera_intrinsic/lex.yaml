@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [347.50345368595106, 0.0, 313.8081333478524, 0.0, 338.462213604235, 263.9232010415723,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: lex/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.28909636522727505, 0.05875395187808427, -0.010251705336394266, -0.0015560610969276468,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [239.39352416992188, 0.0, 313.0608850712597, 0.0, 0.0, 277.0394592285156,
+    265.42388274152654, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [338.0034463326781, 0.0, 308.47926416184055, 0.0, 341.5315204157286, 219.19377554741945,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: daisy/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2872095735914109, 0.06116236983115812, 0.0027253381800431548, 0.0027970599203114466,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [236.42759704589844, 0.0, 314.313485629953, 0.0, 0.0, 280.0157775878906, 211.40359900364274,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

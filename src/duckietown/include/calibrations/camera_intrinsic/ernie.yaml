@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [312.3315405248188, 0.0, 316.6683374946642, 0.0, 315.2212073442505, 241.43372854679217,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: ernie/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2822449841204083, 0.061989708236957555, -0.0017337564672521525, -0.00025316042479965286,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [222.00997924804688, 0.0, 315.0639788300432, 0.0, 0.0, 249.6038360595703,
+    239.44105742018746, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

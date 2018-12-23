@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [327.7402856801207, 0.0, 307.60750536781586, 0.0, 326.55854654129206, 235.7533456441121,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: tianlu/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.30117367122208927, 0.08240101883856908, 0.007511850692533384, -0.0020675900294327143,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [249.0255584716797, 0.0, 304.1594368019778, 0.0, 0.0, 263.230712890625, 242.6724188405351,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

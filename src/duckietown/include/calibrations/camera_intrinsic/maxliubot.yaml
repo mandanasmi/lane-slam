@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [327.2496851314455, 0.0, 321.24416397517734, 0.0, 329.77396663517993, 237.24829510675423,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: maxliubot/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.26918151701923576, 0.054725065114631745, 0.0025422996046694, 0.0010652496398902,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [228.5788116455078, 0.0, 322.4166651178184, 0.0, 0.0, 271.63671875, 238.75149953365326,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

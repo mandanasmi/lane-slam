@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [318.2112215489262, 0.0, 339.7547640074441, 0.0, 313.6462738424372, 211.72502801235638,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: cookie/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2802347603390002, 0.05770554466195607, 0.003817048087807159, 0.0007132449615482426,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [222.93875122070312, 0.0, 340.2638579236227, 0.0, 0.0, 244.01840209960938,
+    198.56958898496487, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

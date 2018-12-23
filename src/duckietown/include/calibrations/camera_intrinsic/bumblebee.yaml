@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [335.1634231607337, 0.0, 306.4277095016041, 0.0, 332.1356841207191, 222.97304397817504,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: bumblebee/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.29999085661979047, 0.07519386149236076, 0.0008210693706707357, 0.002010156425424989,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [245.22962951660156, 0.0, 308.9020391735903, 0.0, 0.0, 267.5545959472656,
+    214.90680630847055, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [343.7709992465966, 0.0, 316.7111259561417, 0.0, 339.77935189124037, 256.49345835130964,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: botanic/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.28601033747933563, 0.05773802761670695, -0.0027549133445890694, -0.0008098437662606323,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [234.7398681640625, 0.0, 316.77343502029544, 0.0, 0.0, 277.9075012207031,
+    262.41158707264367, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

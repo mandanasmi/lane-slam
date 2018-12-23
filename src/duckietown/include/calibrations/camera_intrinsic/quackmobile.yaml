@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [313.749124376468, 0.0, 342.46601871967425, 0.0, 315.2618376365678, 243.61177437407108,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: quackmobile/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2878152378701094, 0.06065126859194755, 0.00431554226695094, -0.0008848555098759183,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [218.82208251953125, 0.0, 340.30043824456516, 0.0, 0.0, 244.86923217773438,
+    251.98828616294122, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

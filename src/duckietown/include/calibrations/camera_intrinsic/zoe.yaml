@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [337.3092553690036, 0.0, 314.1137093251905, 0.0, 336.85901913795016, 217.29382862441514,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: zoe/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.26797875490095663, 0.05000315164795536, 0.0013671143837104543, -0.0004467441984923973,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [228.53988647460938, 0.0, 314.8955206606661, 0.0, 0.0, 277.1241149902344,
+    207.18881284029703, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

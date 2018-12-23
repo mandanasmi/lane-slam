@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [345.076783483947, 0.0, 305.2219829128028, 0.0, 343.7987350210436, 243.79944448550393,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: alvin/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2837290030012355, 0.05953145494969834, -0.0012895822524752053, 0.0002990129972471438,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [240.6711883544922, 0.0, 304.0936351153996, 0.0, 0.0, 284.8310546875, 244.32655271387193,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

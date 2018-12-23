@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [348.42579208724294, 0.0, 285.8641396299884, 0.0, 348.7466073385909, 218.2849298999871,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: dori/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.3091994985761873, 0.07468976668880603, 0.004997833615823117, -0.0006570563957179055,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [251.63832092285156, 0.0, 281.2311284282205, 0.0, 0.0, 283.8123474121094,
+    212.51807098180325, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

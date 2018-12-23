@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [337.25946337669194, 0.0, 328.19903548474554, 0.0, 340.7467028594954, 226.9583401872555,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: duckworth/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2582588875333317, 0.05032655777027355, 0.00561745227418934, -0.0008151273201010316,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [236.20114135742188, 0.0, 329.4889586945101, 0.0, 0.0, 288.2437744140625,
+    226.89042429607798, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

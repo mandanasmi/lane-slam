@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [348.43659035868245, 0.0, 314.42705706905525, 0.0, 342.98783700635806, 228.4910222710114,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: frankbot/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.27526801383123356, 0.06339788583349713, -0.0034639000892992575, -0.0016037796240050415,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [252.29896545410156, 0.0, 309.63471236298574, 0.0, 0.0, 286.3172607421875,
+    219.8203400217826, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

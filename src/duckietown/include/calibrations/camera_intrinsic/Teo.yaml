@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [330.97157748657446, 0.0, 316.6827507684257, 0.0, 331.70695515573993, 231.69152905893193,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: Teo/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2724349698280765, 0.05536654180379657, -8.22915071199787e-05, 0.0009679364518962706,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [230.0449981689453, 0.0, 318.91611781193205, 0.0, 0.0, 272.5489807128906,
+    227.19265112491485, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

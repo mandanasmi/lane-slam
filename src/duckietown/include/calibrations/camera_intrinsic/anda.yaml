@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [348.7000091735144, 0.0, 306.73208476191644, 0.0, 343.836597002638, 225.63263925183884,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: anda/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.31616865884417955, 0.07749503179810446, 0.000939231893799218, 0.003263619217363021,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [247.95936584472656, 0.0, 311.4608576261162, 0.0, 0.0, 276.7603454589844,
+    218.56195897490943, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [362.1626641901725, 0.0, 301.37835588820803, 0.0, 363.1258079600186, 229.07036892375572,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: bamboo17/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.3584183400794838, 0.07774994727801265, -0.007254004942261517, 0.011634648759117579,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [255.0011749267578, 0.0, 300.26397710366473, 0.0, 0.0, 280.8846130371094,
+    211.04146127659988, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

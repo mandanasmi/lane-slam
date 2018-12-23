@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [347.81084672300216, 0.0, 303.8511702476765, 0.0, 353.536912262381, 224.22121338804706,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: ordakgt/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2851238335720768, 0.05796944534332743, 0.003390478064394908, 0.0015933329340193608,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [240.15890502929688, 0.0, 304.58436284307754, 0.0, 0.0, 295.73150634765625,
+    220.15197097489363, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

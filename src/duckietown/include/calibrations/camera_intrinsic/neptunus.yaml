@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [318.9157977461101, 0.0, 316.20843655089175, 0.0, 320.7995921455846, 224.99133992954012,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: neptunus/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.27200612663802953, 0.04863086108427434, -0.00032296923761449215, 0.0012745130593098323,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [216.29831848144534, 0.0, 317.164711519772, 0.0, 0.0, 248.64725036621095,
+    215.20118553985995, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

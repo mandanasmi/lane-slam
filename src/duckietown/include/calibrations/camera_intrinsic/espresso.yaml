@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [334.39213398126145, 0.0, 314.9925668144282, 0.0, 332.87555713040507, 223.36698478469992,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: espresso/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.29991957678062336, 0.07342939456691294, 0.0008861276691529229, 0.0020988575639997106,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [242.6693572998047, 0.0, 317.6275493134981, 0.0, 0.0, 268.0631408691406, 215.38061606698648,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

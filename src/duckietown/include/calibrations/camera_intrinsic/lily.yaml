@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [312.63691242285097, 0.0, 310.02321042703403, 0.0, 316.8739153901084, 226.49540748340675,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: lily/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2793713176343971, 0.057317588662081004, 0.00019571021854236434, 0.0023674724507733434,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [218.11349487304688, 0.0, 312.87777155127696, 0.0, 0.0, 250.0011749267578,
+    217.63063428757232, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

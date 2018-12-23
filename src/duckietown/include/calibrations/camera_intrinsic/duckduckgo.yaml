@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [354.9839032361367, 0.0, 321.81266623573543, 0.0, 349.2004527284266, 238.49016203961236,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: duckduckgo/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.3125081858280108, 0.08499637683972298, -0.0013305717143733712, 0.001288812485745406,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [261.76446533203125, 0.0, 323.15386253927863, 0.0, 0.0, 287.6871032714844,
+    236.3434443041442, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

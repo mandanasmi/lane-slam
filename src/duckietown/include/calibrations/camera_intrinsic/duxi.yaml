@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [332.60590681589656, 0.0, 319.20190613292374, 0.0, 334.4404826419346, 240.75571054847398,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: duxi/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.30407730824041185, 0.08034536793800638, 0.0014745912690997992, 0.001095524085004526,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [247.40426635742188, 0.0, 320.72396641016167, 0.0, 0.0, 271.493408203125,
+    242.86969445832074, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

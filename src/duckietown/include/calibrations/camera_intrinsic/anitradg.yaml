@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [323.1440468387941, 0.0, 312.4277979717682, 0.0, 318.01943575181934, 228.02417905883206,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: anitradg/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2937943098448813, 0.06667139607383762, -0.0005168767540959618, 0.003334593840426681,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [229.87261962890625, 0.0, 317.19801676997304, 0.0, 0.0, 249.39732360839844,
+    219.62911786889345, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

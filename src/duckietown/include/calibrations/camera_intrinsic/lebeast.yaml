@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [316.4726533653214, 0.0, 321.67155452588446, 0.0, 315.2847646230648, 230.86822223793416,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: lebeast/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.24517947908754184, 0.04156312409112942, 0.0016619329935685931, -0.0002692188115163627,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [212.85939025878906, 0.0, 320.1465765684861, 0.0, 0.0, 257.876708984375, 227.35833024630847,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

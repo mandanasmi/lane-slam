@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [343.1774165408615, 0.0, 335.96258144100517, 0.0, 339.64661484459873, 242.79938617501548,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: mcquack/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2913235290864234, 0.07165421714751836, 0.00264970413637002, -0.0013866099571980964,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [250.22654724121094, 0.0, 331.32563183820093, 0.0, 0.0, 279.8052978515625,
+    247.08661145883525, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3
