@@ -38,10 +38,11 @@ class LineSanityNode(object):
 
 
     def cbSegmentList(self, segmentList):
-        print('Processing segment list')
+        # print('Processing segment list')
         # Start a daemon thread to process the segment list.
-        self.processSegmentList(segmentList)
-        self.publisher.publish(segmentList)
+        filteredSegments = self.processSegmentList(segmentList)
+        print('Filtered segments:', str(len(filteredSegments.segments)) + '/' + str(len(segmentList.segments)))
+        self.publisher.publish(filteredSegments)
 
 
     def processSegmentList(self,  segmentList):
@@ -64,22 +65,10 @@ class LineSanityNode(object):
                 continue
 
             # filteredSegments.append(segment)
-            print(filteredSegments)
+            # print(filteredSegments)
             filteredSegments.segments.append(segment)
-        print('Filtered segments:', str(len(filteredSegments.segments)) + '/' + str(len(segmentList.segments)))
-        # segmentMsgList = []
-        # for x1,y1,x2,y2,norm_x,norm_y in np.hstack((lines,normals)):
-        #     segment = Segment()
-        #     segment.color = color
-        #     segment.pixels_normalized[0].x = x1
-        #     segment.pixels_normalized[0].y = y1
-        #     segment.pixels_normalized[1].x = x2
-        #     segment.pixels_normalized[1].y = y2
-        #     segment.normal.x = norm_x
-        #     segment.normal.y = norm_y
-             
-        #     segmentMsgList.append(segment)
-        # return segmentMsgList
+        
+        return filteredSegments
 
 
     def fancyFilters(self, segment):
