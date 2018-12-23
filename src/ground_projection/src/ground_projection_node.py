@@ -35,7 +35,7 @@ class GroundProjectionNode(object):
         self.image_channel_name = "image_raw"
 
         # Subs and Pubs
-        self.pub_lineseglist_ = rospy.Publisher("~lineseglist_out",SegmentList, queue_size=1)
+        self.pub_lineseglist_ = rospy.Publisher("~lineseglist_out_lsd",SegmentList, queue_size=1)
         self.sub_lineseglist_ = rospy.Subscriber("~lineseglist_in",SegmentList, self.lineseglist_cb)
 
 

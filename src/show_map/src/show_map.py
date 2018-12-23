@@ -7,8 +7,8 @@ from visualization_msgs.msg import Marker, MarkerArray
 
 class ShowMapNode(object):
     def __init__(self):
-        self.sub_seg=rospy.Subscriber('/a313/ground_projection/lineseglist_out',SegmentList, self.storeSegments, queue_size=1)
-        self.pub_map = rospy.Publisher("/lane_map", MarkerArray, queue_size=1)
+        self.sub_seg=rospy.Subscriber('~lineseglist_in',SegmentList, self.storeSegments, queue_size=1)
+        self.pub_map = rospy.Publisher("~lane_map", MarkerArray, queue_size=1)
         self.seg_list = []
         self.marker_map = MarkerArray()
         self.dx = 0.01
