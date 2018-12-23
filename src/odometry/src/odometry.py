@@ -5,6 +5,8 @@ import rospy
 from std_msgs.msg import String
 from duckietown_msgs.msg import WheelsCmdStamped
 import tf
+from visualization_msgs.msg import Marker
+from geometry_msgs.msg import Point
 
 
 def rotate_point(px, py, cx, cy, theta):
@@ -42,10 +44,24 @@ def get_right_vec(angle):
 class OdometryNode(object):
     def __init__(self):
         self.sub_lanefilter=rospy.Subscriber('~wheels_cmd',WheelsCmdStamped, self.getPose, queue_size=1)
+        self.pub_traj = rospy.Publisher("~trajectory", Marker, queue_size=1)
+
         self.pos = [0.0,0.0]
         self.theta = 0.0
         self.last_t=rospy.Time.now().nsecs/1e9
         self.dt = 0.1
+
+        self.traj_mark = Marker()
+        self.traj_mark.header.stamp=rospy.Time.now()
+        self.traj_mark.id = 0
+        self.traj_mark.header.frame_id = '/map'
+        self.traj_mark.ns="odom_trajectory"
+        self.traj_mark.scale.x = 0.1
+        self.traj_mark.color.a = 1.0
+        self.traj_mark.color.b = 1.0
+        self.traj_mark.type=self.traj_mark.LINE_STRIP
+        self.traj_mark.action=self.traj_mark.ADD
+
 
     def drive(self,Vl,Vr):
         """
@@ -83,6 +99,13 @@ class OdometryNode(object):
         cur_angle += rotAngle
         return cur_pos, cur_angle
 
+    def showTraj(self):
+        position=Point()
+        position.x = self.pos[0]
+        position.y = self.pos[1]
+        position.z = 0.0
+        self.traj_mark.points.append(position)
+        self.pub_traj.publish(self.traj_mark)
 
     def getPose(self,wheels_cmd):
         self.dt=wheels_cmd.header.stamp.nsecs/1e9 - self.last_t
@@ -94,6 +117,7 @@ class OdometryNode(object):
                          rospy.Time.now(),
                          "duck",
                          "map")
+            self.showTraj()
 
 
 if __name__ == '__main__':
@@ -101,3 +125,4 @@ if __name__ == '__main__':
     br = tf.TransformBroadcaster()
     odometry_node = OdometryNode()
     rospy.spin()
+

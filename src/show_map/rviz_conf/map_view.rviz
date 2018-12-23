@@ -6,7 +6,6 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /Axes1
       Splitter Ratio: 0.5
     Tree Height: 369
   - Class: rviz/Selection
@@ -75,6 +74,14 @@ Visualization Manager:
       Name: Axes
       Radius: 0.100000001
       Reference Frame: duck
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /a313/odometry_node/trajectory
+      Name: Marker
+      Namespaces:
+        {}
+      Queue Size: 100
       Value: true
   Enabled: true
   Global Options:
