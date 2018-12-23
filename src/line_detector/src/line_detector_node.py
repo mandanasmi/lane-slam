@@ -46,17 +46,26 @@ class LineDetectorNode(object):
         self.detector = None
         self.verbose = None
         self.updateParams(None)
-            
+        
+        self.vehicle = rospy.get_param('~vehicle')
+
         # Publishers
+        # self.pub_lines = rospy.Publisher("~segment_list", SegmentList, queue_size=1)
+        # self.pub_image = rospy.Publisher("~image_with_lines", Image, queue_size=1)
         self.pub_lines = rospy.Publisher("~segment_list", SegmentList, queue_size=1)
         self.pub_image = rospy.Publisher("~image_with_lines", Image, queue_size=1)
        
         # Subscribers
-        self.sub_image = rospy.Subscriber("~image", CompressedImage, self.cbImage, queue_size=1)
-        self.sub_transform = rospy.Subscriber("~transform", AntiInstagramTransform, self.cbTransform, queue_size=1)
-        self.sub_switch = rospy.Subscriber("~switch", BoolStamped, self.cbSwitch, queue_size=1)
+        # self.sub_image = rospy.Subscriber("~image", CompressedImage, self.cbImage, queue_size=1)
+        # self.sub_transform = rospy.Subscriber("~transform", AntiInstagramTransform, self.cbTransform, queue_size=1)
+        # self.sub_switch = rospy.Subscriber("~switch", BoolStamped, self.cbSwitch, queue_size=1)
+        self.sub_image = rospy.Subscriber("/"+self.vehicle+"/camera_node/image/compressed", CompressedImage, self.cbImage, queue_size=1)
+        self.sub_transform = rospy.Subscriber("/"+self.vehicle+"/anti_instagram/transform", AntiInstagramTransform, self.cbTransform, queue_size=1)
+        # self.sub_switch = rospy.Subscriber("~switch", BoolStamped, self.cbSwitch, queue_size=1)
 
+        rospy.loginfo("[%s] Vehicle name = %s." % (self.node_name, self.vehicle))
         rospy.loginfo("[%s] Initialized (verbose = %s)." %(self.node_name, self.verbose))
+        rospy.loginfo("[%s] %s/camera_node/image/compressed" % (self.node_name, self.vehicle))
 
         rospy.Timer(rospy.Duration.from_sec(2.0), self.updateParams)
 

@@ -62,8 +62,8 @@ class LineDetectorLSD(Configurable, LineDetectorInterface):
         return edges
 
     def _LSDLine(self, gray):
-        lsd = cv2.cv2.createLineSegmentDetector(_refine = cv2.LSD_REFINE_ADV)
-        lines, width, prec = lsd.detect(gray)
+        lsd = cv2.createLineSegmentDetector(_refine = cv2.LSD_REFINE_ADV)
+        lines, width, prec, _ = lsd.detect(gray)
         if lines is not None:
             lines = np.array(lines[:,0])
         else:
