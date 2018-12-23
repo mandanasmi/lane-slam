@@ -54,7 +54,7 @@ class OdometryNode(object):
 
         cur_pos = np.array(self.pos)
         cur_angle = self.theta
-        l = 0.103
+        l = 0.5
 
         # If the wheel velocities are the same, then there is no rotation
         if Vl == Vr:
