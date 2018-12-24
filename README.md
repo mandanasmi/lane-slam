@@ -14,18 +14,18 @@ By following the instruction, you should be able to see the following map visual
 
 
 <figure>
-    <figcaption>Examples of expected visualizations at different time steps: </figcaption>
+    <figcaption>Examples of expected visualizations at different time steps: <br/> </figcaption>
 	<figure>
 	    <figcaption>Map after X seconds</figcaption>
-	    <img style='width:20em; height:15em' src="figures/map1.png"/>
+	    <img src="figures/map1.png" width="100"/>
 	</figure>
 	<figure>
 	    <figcaption>Map after Y seconds (Y > X)</figcaption>
-	    <img style='width:20em; height:15em' src="figures/map2.png"/>
+	    <img src="figures/map2.png" width="100"/>
 	</figure>
 	<figure>
 	    <figcaption>Map after Z seconds (Y > X and Z >> X)</figcaption>
-	    <img style='width:20em; height:15em' src="figures/map3.png"/>
+	    <img src="figures/map3.png" width="100"/>
 	</figure>
 </figure>
 
@@ -40,25 +40,25 @@ You'll also need a Linux computer with ROS. If you're using a mac OSx system you
 
 Here are the modules we defined to build the semantic map: 
 
-##1. Line Detector
+## Line Detector
 
 This module takes an image as an input and outputs detected lines. In this package, we made some enhancement on the 'line-detector' from the Duckietown stack. We use a new line segment detector [LSD](https://docs.opencv.org/3.4/db/d73/classcv_1_1LineSegmentDetector.html). This detector gets more stable and longer line segments compared to `HoughLines`, which seems to be the default. 
 
 To run this node using `roslaunch`, execute the following command.
 `roslaunch line_detector line_detector_node.launch veh:=neo local:=true` (on your laptop)  
 
-##2. Line Descriptor
+## Line Descriptor
 
 It takes line segments from the detector and produces descriptors. This package uses _OpenCV_ functions to compute binary descriptors for a bunch of line segments, to help in matching/associating lines. Currently, this functionality is in beta, but people are welcome to play around with the code in here.  
 
-##3. Ground Projection
+## Ground Projection
 
 This package takes in a list of line segments detected in the image and projects them onto the 3D ground plane using a homography matrix computed based on the extrinsic calibration parameters.  
 
 This node will publish a message of type `SegmentList`, which contains a list of _ground-projected_ line segments (i.e., line segments on the 3D ground plane), with a topic name `/neo/ground_projection/lineseglist_out_lsd` (assuming *neo* is the name of the Duckiebot)  
 
 
-##4. Line sanity
+## Line sanity
 This package takes in _ground-projected_ line segments and _filters out_ spurious lines. It subscribes to a topic that publishes a `SegmentList` message type, applies filters, and publishes the filtered line segments to another topic `filtered_segments_lsd` (again, as a `SegmentList` message type). 
 
 *Types of spurious lines filtered out:*
@@ -69,16 +69,16 @@ This package takes in _ground-projected_ line segments and _filters out_ spuriou
 4. All lines that do not satisfy a certain angular threshold.  
 
 
-##5. Odometry
+## Odometry
 
 This package takes an input from the logs (in our case wheel commands) and produces an estimate of the duckiebot's position.  
 
 
-##6. Show Map
+## Show Map
 
 As the last step, we Combine odometry and line detections to build a map. It takes the estimated position from odometry and the ground projected lines to build an display a map of the lines. 
 
-6. Running All together
+## Running All together
 
 We have an individual launch file for each module, so you can run each node separated from others and then launch show_map to see the visualization or you can just run the global launch file that launch every node themselves in the right order. 
 
