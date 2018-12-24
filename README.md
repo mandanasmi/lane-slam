@@ -12,25 +12,24 @@ To achieve this map, we defined several individual packages that are integrated 
 
 By following the instruction, you should be able to see the following map visualizations constructed of colored lines from images in the log you're experimenting. You can visualize the line-based semantic map built by your duckiebot using rviz.
 
-
-<figure>
-    <figcaption>Examples of expected visualizations at different time steps: <br/></figcaption>
-	<figure>
-	    <figcaption>Map after X seconds</figcaption>
-	    <img style='width:15em; height:15em' src="figures/map1.png"/>
-	</figure>
-	<figure>
-	    <figcaption>Map after Y seconds (Y > X)</figcaption>
+<table align="center">
+  <tr>
+     <td>
+ 		<img style='width:15em; height:15em' src="figures/map1.png"/>
+	    <p>Map after X seconds</p>
+     </td>
+     <td>
 	    <img style='width:15em; height:15em' src="figures/map2.png"/>
-	</figure>
-	<figure>
-	    <figcaption>Map after Z seconds (Y > X and Z >> X)</figcaption>
+	    <p>Map after Y seconds (Y > X)</p>
+     </td>
+     <td>
 	    <img style='width:15em; height:15em' src="figures/map3.png"/>
-	</figure>
-</figure>
+	    <p>Map after Z seconds (Y > X and Z >> X)</p>
+     </td>
+  </tr>
+</table>
 
-
-System Requirements: 
+## System Requirements: 
 
 As mentioned, we build a map on a log of a duckiebot. To run the following demo, you'll need the actual log (a `.bag` file), in which the image seen by the robot is recorded (probably using the `ros-picam` node), as well as some source of odometry (in our code we use published executed wheel commands, but you could use any other odometry method).
 
