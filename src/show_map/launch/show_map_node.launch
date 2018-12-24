@@ -1,0 +1,24 @@
+<launch>
+  <arg name="veh" doc="Name of vehicle. ex: megaman"/>
+  <arg name="local" default="true" doc="true for running everything you possibly can on laptop. false for everything running on vehicle."/>
+  <arg name="config" default="baseline" doc="Specify a config."/>
+  <arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+  <arg name="camera_topic" default="camera_node"/>
+  <!-- <arg name="rectify" default="false" doc="If set to true, rectify image before process."/> -->
+
+
+
+
+<!--  <include file="$(find duckietown)/machines"/> -->
+  <group ns="$(arg veh)">
+
+    <node if="$(arg local)"  pkg="show_map" type="show_map.py" name="show_map_node" output="screen" clear_params="true" required="true">
+      <!-- <remap from="~lineseglist_in" to="ground_projection/lineseglist_out_lsd"/> -->
+      <remap from="~lineseglist_in" to="line_sanity_node/filtered_segments_lsd" />
+    </node>
+
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find show_map)/rviz_conf/map_view.rviz"/>
+
+
+  </group>
+</launch>
