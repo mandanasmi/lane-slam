@@ -7,6 +7,7 @@ We provide a demo of building a semantic map of lanes in Duckietown based on log
 You'll find below the guide and explanations for the demo we propose.
 
 
+
 # Exercise: Towards Semantic Mapping in Duckietown: Building a map of Duckietown lanes {#semantic-mappping status=draft}
 
 ## Skills learned
@@ -30,26 +31,26 @@ To obtain this map, we use many modules which can be independently modified and 
 ## Expected results
 By the end of this demo, you should be able to visualize a map of the colored lanes which were seen by the duckiebot whose log you are using, as illustrated below:
 <figure>
-   <figcaption>Examples of expected visualizations at different time steps: </figcaption>
- <figure>
-     <figcaption>Map after 15 seconds</figcaption>
-     <img style='width:20em; height:15em' src="figures/map1.png"/>
- </figure>
- <figure>
-     <figcaption>Map after 30 seconds</figcaption>
-     <img style='width:20em; height:15em' src="figures/map2.png"/>
- </figure>
- <figure>
-     <figcaption>Map after 60 seconds</figcaption>
-     <img style='width:20em; height:15em' src="figures/map3.png"/>
- </figure>
+    <figcaption>Examples of expected visualizations at different time steps: </figcaption>
+	<figure>
+	    <figcaption>Map after 15 seconds</figcaption>
+	    <img style='width:20em; height:15em' src="figures/map1.png"/>
+	</figure>
+	<figure>
+	    <figcaption>Map after 30 seconds</figcaption>
+	    <img style='width:20em; height:15em' src="figures/map2.png"/>
+	</figure>
+	<figure>
+	    <figcaption>Map after 60 seconds</figcaption>
+	    <img style='width:20em; height:15em' src="figures/map3.png"/>
+	</figure>
 </figure>
 
 ## Instructions
 ### Prerequisites
 As mentioned, we build a map on a log of a duckiebot. To run the following demo, you'll need the following:
 
-* An actual _log_ (a `.bag` file), in which the image seen by the robot is recorded (probably using the `ros-picam` node), as well as some source of odometry (in our code we use published executed wheel commands, but you could use any other odometry method). Here is a log file you can use which has the required information: [rosbag file](https://drive.google.com/file/d/1L6wHbDHEj4lb9FHX6smMZLZaaE2RdTIl/view?usp=sharing).
+* An actual _log_ (a `.bag` file), in which the image seen by the robot is recorded (probably using the `ros-picam` node), as well as some source of odometry (in our code we use the published executed wheel commands). Here is a log file you can use which has the required information: [rosbag file](https://drive.google.com/file/d/1L6wHbDHEj4lb9FHX6smMZLZaaE2RdTIl/view?usp=sharing).
 * A computer with _ROS Kinetic_.
 * The _lane-slam_ repository which you can download and build with the following commands:
 
@@ -75,37 +76,43 @@ Now to see how we got there you curious duck, read the following sections! You c
 ### Overview of the modules
 Many different modules are used to build the lane map we plan to obtain. Here is a list of which modules we have and how they are combined:
 
-* Line detector module: takes an image input and outputs detected lines.  
-* Line descriptor module: takes line segments from the detector and produces descriptors.  
-* Ground projection* module: takes line segments from the detector and outputs it's 2D position on the ground relative to the robot.  
-* Line sanity module: takes ground projected segments and filters out some incoherent segments.  
-* Odometry module: takes an input from the logs (in our case wheel commands) and produces an estimate of the duckiebot's position.  
-* Show map module: takes the estimated position from odometry and the ground projected lines to build an display a map of the lines.  
+* _Line detector_ module: takes an image input and outputs detected lines.  
+* _Line descriptor_ module: takes line segments from the detector and produces descriptors.  
+* _Ground projection_ module: takes line segments from the detector and outputs its 2D position on the ground relative to the robot.  
+* _Line sanity_ module: takes ground projected segments and filters out some incoherent segments.  
+* _Odometry module_: takes an input from the logs (in our case wheel commands) and produces an estimate of the duckiebot's position.  
+* _Show map module_: takes the estimated position from odometry and the ground projected lines to build and display a map of the lines.  
 
 
-We now describe every module.  
+You will find more detailed descriptions of every module below, as well as instructions to experiment with them.
 
 ### Line Detector  (`lane_slam/src/line_detector`)
+*Explanation:*
 
 This package is an enhanced version of the `line_detector` from the Duckietown `lane_control` stack. This node subscribes to a topic that publishes a `CompressedImage` message type, detects line segments in that image, and publishes the detected line segments, their normals, color, and position information in the form of a `SegmentList` message.  
 
 *Our modifications:* We adapt the original `line_detector` package to include a new line segment detector [LSD](https://docs.opencv.org/3.4/db/d73/classcv_1_1LineSegmentDetector.html). This detector gets far more stable  and longer line segments compared to `HoughLines`, which seems to be the default.  
 
-*Example usage:*  
+*Run it:*
 
-To set up all you need to run the node, assume your duckiebot name is *_neo_*. _Neo_ publishes camera info to a topic named `/neo/camera_node` (i.e., the topic that `line_detector_node` will subscribe to is `/neo/camera_node/image/compressed`). It also has a bunch of line detector parameters are available in the file `lane-slam/src/duckietown/config/baseline/line_detector/line_detector_node/default.yaml`
+To set up all you need to run the node, assume your duckiebot name is *_neo_*. _Neo_ publishes camera info to a topic named `/neo/camera_node` (i.e., the topic that `line_detector_node` will subscribe to is `/neo/camera_node/image/compressed`). It also has a bunch of line detector parameters that are available in the file `lane-slam/src/duckietown/config/baseline/line_detector/line_detector_node/default.yaml`
 
-To run this node using `roslaunch`, execute the following command (on your laptop).
+To run this node using `roslaunch`, execute the following command (on your laptop), replacing `neo`by the appropriate name.
 ```
 roslaunch line_detector line_detector_node.launch veh:=neo local:=true
 ```
 
 ### Line Descriptor (`lane_slam/src/line_descriptor`)
+*Explanation:*
 
 This package uses _OpenCV_ functions to compute binary descriptors for a bunch of line segments, to help in matching/associating lines. Currently, this functionality is in beta, but people are welcome to play around with the code in here.  
 
 ### Ground projection (`lane_slam/src/ground_projection`)
+*Explanation:*
+
 This package is a copy of the `ground_projection` module from the Duckietown software stack. It takes in a list of line segments detected in the image and projects them onto the 3D ground plane using a homography matrix computed based on the extrinsic calibration parameters.  
+
+*Run it:*
 
 To ensure that the node runs, you must have the following.
 
@@ -120,14 +127,21 @@ roslaunch ground_projection ground_projection.launch veh:=neo
 This node will publish a message of type `SegmentList`, which contains a list of _ground-projected_ line segments (i.e., line segments on the 3D ground plane), with a topic name `/neo/ground_projection/lineseglist_out_lsd` (assuming *neo* is the name of the Duckiebot)  
 
 ### Line sanity (`lane_slam/src/line_sanity`)
+*Explanation:*
+
 This package takes in _ground-projected_ line segments and _filters out_ spurious lines. It subscribes to a topic that publishes a `SegmentList` message type, applies filters, and publishes the filtered line segments to another topic `filtered_segments_lsd` (again, as a `SegmentList` message type).  
 
+*Run it:*
+
 To ensure this node works, you need to set up the following topics in `lane-slam/src/line_sanity/launch/line_sanity.launch`. Assume your duckiebot is named *neo*.
-1. By default, the `line_sanity_node` publishes to the topic `/neo/line_sanity_node/filtered_segments_lsd`. If you need it to publish it to another topic, open `line_sanity.launch` (in the `launch` directory of the `line_sanity` package). Around lines 5-7, where the `line_sanity_node` is being launched, add in a remap command.
+
+1. By default, the `line_sanity_node` publishes to the topic `/neo/line_sanity_node/filtered_segments_lsd`.
+If you need it to publish it to another topic, open `line_sanity.launch` (in the `launch` directory of the `line_sanity` package). Around lines 5-7, where the `line_sanity_node` is being launched, add in a remap command.
 ```
 <remap from="~filtered_segments_lsd" to="name/of/topic/you/want/to/publish/to" />
 ```
-2. By default, the `line_sanity_node` subscribes to the topic `/neo/ground_projection/lineseglist_out_lsd`. If you need it to publish it to another topic, open `line_sanity.launch` (in the `launch` directory of the `line_sanity` package). Around lines 5-7, where the `line_sanity_node` is being launched, add in a remap command.
+2. By default, the `line_sanity_node` subscribes to the topic `/neo/ground_projection/lineseglist_out_lsd`.
+If you need it to publish it to another topic, open `line_sanity.launch` (in the `launch` directory of the `line_sanity` package). Around lines 5-7, where the `line_sanity_node` is being launched, add in a remap command.
 ```
 <remap from="/neo/ground_projection/lineseglist_out_lsd" to="name/of/topic/you/want/to/subscribe/to" />
 ```
@@ -135,6 +149,7 @@ To ensure this node works, you need to set up the following topics in `lane-slam
 *IMPORTANT:* This node will only work if the `SegmentList` that the node subscribes to has already been ground-projected. Else, there will be several `ValueError`s.
 
 *Types of spurious lines filtered out:*
+
 1. Lines behind the robot  
 2. Lines that are not white or yellow, and cannot be confidently classified as being left or right edges of a white or yellow line (we ignore RED lines for now).  
 3. Lines that are farther ahead from the robot, above a certain distance threshold.  
@@ -156,6 +171,7 @@ We run the kinematics and then publish the estimated position as a [tf](http://w
 
 
 *Run it:*
+
 You can run the odometry node and our visualization using the following command, replacing `duckiename` by the name of the duckiebot associated to your logs:
 ```
 roslaunch odometry odometry odometry.launch veh:=$duckiename
