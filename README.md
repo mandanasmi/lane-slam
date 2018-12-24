@@ -17,15 +17,15 @@ By following the instruction, you should be able to see the following map visual
     <figcaption>Examples of expected visualizations at different time steps: <br/> </figcaption>
 	<figure>
 	    <figcaption>Map after X seconds</figcaption>
-	    <img src="figures/map1.png" width="100"/>
+	    <img src="figures/map1.png" width="100%"/>
 	</figure>
 	<figure>
 	    <figcaption>Map after Y seconds (Y > X)</figcaption>
-	    <img src="figures/map2.png" width="100"/>
+	    <img src="figures/map2.png" width="100%"/>
 	</figure>
 	<figure>
 	    <figcaption>Map after Z seconds (Y > X and Z >> X)</figcaption>
-	    <img src="figures/map3.png" width="100"/>
+	    <img src="figures/map3.png" width="100%"/>
 	</figure>
 </figure>
 
