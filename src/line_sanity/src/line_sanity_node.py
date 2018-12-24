@@ -55,6 +55,7 @@ class LineSanityNode(object):
                 continue
             # Discard RED lines, for now
             if segment.color != segment.WHITE and segment.color != segment.YELLOW:
+                print('#########################CODE RED!!')
                 continue
             # Apply a few more fancy filters to the segment
             d_i, phi_i, l_i, state = self.fancyFilters(segment)
